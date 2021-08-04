@@ -4,7 +4,7 @@ namespace UnityUtils
 {
 	public class UnityDestroyService : IDespawnService
 	{
-		public void DespawnGameObject<T>(T component, float delay = 0, bool immediate = false) where T : Component
+		public void Despawn<T>(T component, float delay = 0, bool immediate = false) where T : Component
 		{
 #if UNITY_EDITOR
 			if (!Application.isPlaying || immediate)
@@ -17,7 +17,7 @@ namespace UnityUtils
 			Object.Destroy(component, delay);
 		}
 
-		public void DespawnGameObject(GameObject gameObject, float delay = 0, bool immediate = false)
+		public void Despawn(GameObject gameObject, float delay = 0, bool immediate = false)
 		{
 #if UNITY_EDITOR
 			if (!Application.isPlaying || immediate)

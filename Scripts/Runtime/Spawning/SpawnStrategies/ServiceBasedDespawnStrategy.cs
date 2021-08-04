@@ -10,12 +10,12 @@ namespace niscolas.UnityUtils
 
 		public override void Despawn<T>(T component, float delay = 0, bool immediate = false)
 		{
-			Service.DespawnGameObject(component, delay, immediate);
+			Service.Despawn(component, delay, immediate);
 		}
 
 		public override void Despawn(GameObject gameObject, float delay = 0, bool immediate = false)
 		{
-			Service.DespawnGameObject(gameObject, delay, immediate);
+			Service.Despawn(gameObject, delay, immediate);
 		}
 	}
 }
