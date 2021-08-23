@@ -2,12 +2,12 @@
 
 namespace BestLostNFound
 {
-	[CreateAssetMenu(menuName = SceneManagementConstants.BaseCreateSoAssetMenuPath + "Master Loader Profile")]
-	public class MasterLoaderProfile : ScriptableObject
-	{
-		[SerializeField]
-		private SceneProfiles _sceneProfiles;
+    [CreateAssetMenu(menuName = SceneManagementConstants.BaseCreateSoAssetMenuPath + "Master Loader Profile")]
+    public class MasterLoaderProfile : ScriptableObject
+    {
+        [SerializeField]
+        private SceneProfiles _sceneProfiles;
 
-		public SceneProfiles SceneProfiles => _sceneProfiles;
-	}
+        public SceneProfiles SceneProfiles => _sceneProfiles;
+    }
 }
