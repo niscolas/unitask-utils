@@ -40,7 +40,7 @@ namespace niscolas.UnityUtils.Extras
                 .DOFade(1, _fadeDuration.Value)
                 .SetEase(_fadeEase)
                 .SetAutoKill(false)
-                .SetUpdate(_useIndependent.Value)
+                .SetUpdate(_useIndependentUpdate.Value)
                 .OnComplete(
                     () =>
                         _canvasGroup.SetInteractableAndBlocksRaycasts(true)
@@ -51,6 +51,7 @@ namespace niscolas.UnityUtils.Extras
                 .DOFade(0, _fadeDuration.Value)
                 .SetEase(_fadeEase)
                 .SetAutoKill(false)
+                .SetUpdate(_useIndependentUpdate.Value)
                 .OnComplete(
                     () =>
                         _canvasGroup.SetInteractableAndBlocksRaycasts(false)
