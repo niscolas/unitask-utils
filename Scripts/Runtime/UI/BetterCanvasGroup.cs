@@ -27,7 +27,7 @@ namespace niscolas.UnityUtils.Extras
             if (!_canvasGroup)
             {
                 Debug.LogWarning("no CanvasGroup, self destroying");
-                Destroy(gameObject);
+                Destroy(this);
                 return;
             }
 
