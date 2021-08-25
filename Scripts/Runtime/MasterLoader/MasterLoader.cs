@@ -1,16 +1,39 @@
-﻿using UnityEngine;
+﻿using UnityEditor;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 // TODO move to the correct namespace
 namespace BestLostNFound
 {
+    [InitializeOnLoad]
     public static class MasterLoader
     {
-        public static bool ShouldLoadAdditiveScenes => !Application.isEditor && !Application.isPlaying;
+        public static bool ShouldLoadAdditiveScenes =>
+            !Application.isEditor ||
+            Application.isEditor && _enteredPlayMode;
 
         private const string ProfilePath = nameof(MasterLoaderProfile);
 
         private static MasterLoaderProfile _profile;
+        private static bool _enteredPlayMode;
+
+        static MasterLoader()
+        {
+            _enteredPlayMode = false;
+
+            EditorApplication.playModeStateChanged -= PlayModeStateChanged;
+            EditorApplication.playModeStateChanged += PlayModeStateChanged;
+        }
+
+        private static void PlayModeStateChanged(PlayModeStateChange playModeStateChange)
+        {
+            if (playModeStateChange != PlayModeStateChange.EnteredPlayMode)
+            {
+                return;
+            }
+
+            _enteredPlayMode = true;
+        }
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         private static void RuntimeInit()
