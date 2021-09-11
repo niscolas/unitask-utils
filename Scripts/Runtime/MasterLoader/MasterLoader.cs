@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 // TODO move to the correct namespace
 namespace BestLostNFound
 {
-    [InitializeOnLoad]
     public static class MasterLoader
     {
         public static bool ShouldLoadAdditiveScenes =>
@@ -17,7 +16,8 @@ namespace BestLostNFound
         private static MasterLoaderProfile _profile;
         private static bool _enteredPlayMode;
 
-        static MasterLoader()
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+        static void Init()
         {
             _enteredPlayMode = false;
 
