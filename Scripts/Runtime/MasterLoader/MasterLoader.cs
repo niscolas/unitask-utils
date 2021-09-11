@@ -16,6 +16,7 @@ namespace BestLostNFound
         private static MasterLoaderProfile _profile;
         private static bool _enteredPlayMode;
 
+#if UNITY_EDITOR
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
         static void Init()
         {
@@ -34,6 +35,7 @@ namespace BestLostNFound
 
             _enteredPlayMode = true;
         }
+#endif
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         private static void RuntimeInit()
