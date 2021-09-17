@@ -1,8 +1,9 @@
-﻿using UnityAtoms;
+﻿using niscolas.UnityUtils.UnityAtoms;
+using UnityAtoms;
 using UnityAtoms.BaseAtoms;
 using UnityEngine;
 
-namespace niscolas.UnityUtils.UnityAtoms
+namespace niscolas.UnityUtils.Extras
 {
     [CreateAssetMenu(menuName = Constants.ActionsCreateAssetMenuPath + "(Component) => Despawn")]
     public class DespawnComponent : AtomAction<Component>

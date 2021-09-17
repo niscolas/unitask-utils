@@ -8,7 +8,7 @@ using UnityEngine;
 namespace niscolas.UnityUtils.Extras
 {
     [CreateAssetMenu(menuName = Constants.ActionsCreateAssetMenuPath + "(GameObject) => Spawn : GameObject")]
-    public class SpawnAtom : AtomFunction<GameObject, GameObject>
+    public class SpawnGameObject : AtomFunction<GameObject, GameObject>
     {
         [SerializeField]
         private GameObjectReference _prefab;
