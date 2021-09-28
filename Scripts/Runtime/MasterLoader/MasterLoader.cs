@@ -40,22 +40,23 @@ namespace BestLostNFound
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         private static void RuntimeInit()
         {
-            if (!TryFindProfile())
+            if (!TryFindProfile(out _profile))
             {
                 return;
             }
-            
+
             SceneManager.sceneLoaded += SceneManager_OnSceneLoaded;
         }
 
-        public static bool TryFindProfile()
+        public static bool TryFindProfile(out MasterLoaderProfile profile)
         {
+            profile = _profile;
             if (_profile)
             {
                 return true;
             }
 
-            _profile = Resources.Load<MasterLoaderProfile>(ProfilePath);
+            profile = Resources.Load<MasterLoaderProfile>(ProfilePath);
             return _profile;
         }
 
@@ -66,7 +67,7 @@ namespace BestLostNFound
 
         private static void OnSceneLoaded(Scene scene)
         {
-            if (!TryFindProfile() ||
+            if (!TryFindProfile(out _profile) ||
                 !_profile.SceneProfiles.TryGet(scene, out SceneProfile sceneProfile))
             {
                 return;
