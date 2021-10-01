@@ -1,4 +1,5 @@
 ﻿using System;
+using niscolas.UnityUtils.Core;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -10,8 +11,6 @@ namespace niscolas.UnityUtils.Extras
         public static event Action<SceneProfileSO> BeforeSceneProfileLoaded;
         public static event Action<SceneProfileSO> AfterSceneProfileLoaded;
 
-        public static SceneProfileSO CurrentSceneProfile => _currentSceneProfile;
-        
         public static bool ShouldLoadAdditiveScenes =>
             !Application.isEditor ||
             Application.isEditor && _enteredPlayMode;
@@ -19,7 +18,7 @@ namespace niscolas.UnityUtils.Extras
         private const string ProfilePath = "MasterLoaderProfile";
 
         private static MasterLoaderProfileSO _profile;
-        private static SceneProfileSO _currentSceneProfile;
+
         private static bool _enteredPlayMode;
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
@@ -49,6 +48,7 @@ namespace niscolas.UnityUtils.Extras
 
             _enteredPlayMode = true;
         }
+
 #endif
 
         public static bool TryFindProfile(out MasterLoaderProfileSO profile)
@@ -76,14 +76,32 @@ namespace niscolas.UnityUtils.Extras
         private static void OnSceneLoaded(Scene scene)
         {
             if (!_profile ||
-                !_profile.SceneProfiles.TryGet(scene, out _currentSceneProfile))
+                !_profile.SceneProfiles.TryGetValue(scene, out SceneProfileSO sceneProfile))
             {
                 return;
             }
 
-            BeforeSceneProfileLoaded?.Invoke(_currentSceneProfile);
-            _currentSceneProfile.OnLoaded();
-            AfterSceneProfileLoaded?.Invoke(_currentSceneProfile);
+            BeforeSceneProfileLoaded?.Invoke(sceneProfile);
+            sceneProfile.OnLoaded();
+            AfterSceneProfileLoaded?.Invoke(sceneProfile);
+        }
+
+        public static bool TryFindCurrentSceneProfile(out SceneProfileSO currentSceneProfile)
+        {
+            currentSceneProfile = default;
+            
+            Scene currentScene = SceneManager.GetActiveScene();
+
+            if (!TryFindProfile(out MasterLoaderProfileSO profile) ||
+                !profile.SceneProfiles.TryGetValue(
+                    currentScene, out currentSceneProfile))
+            {
+                TheBugger.LogRealWarning(
+                    $"couldn't load {nameof(SceneProfileSO)}...");
+                return false;
+            }
+            
+            return currentSceneProfile;
         }
     }
 }

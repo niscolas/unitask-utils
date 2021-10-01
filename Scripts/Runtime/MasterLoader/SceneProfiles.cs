@@ -13,7 +13,7 @@ namespace niscolas.UnityUtils.Extras
         [SerializeField]
         private List<SceneProfileSO> _content;
 
-        public bool TryGet(Scene scene, out SceneProfileSO profile)
+        public bool TryGetValue(Scene scene, out SceneProfileSO profile)
         {
             profile = _content.FirstOrDefault(currentProfile => currentProfile.Scene.SceneName == scene.name);
             return profile;
