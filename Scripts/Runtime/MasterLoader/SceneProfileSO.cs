@@ -1,24 +1,31 @@
 ﻿using System.Linq;
+using niscolas.UnityUtils.Core;
 using Sirenix.OdinInspector;
+using UnityAtoms.BaseAtoms;
 using UnityAtoms.SceneMgmt;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
-namespace BestLostNFound
+namespace niscolas.UnityUtils.Extras
 {
-    [CreateAssetMenu(menuName = SceneManagementConstants.BaseCreateSoAssetMenuPath + "Scene Profile")]
-    public class SceneProfile : ScriptableObject
+    [CreateAssetMenu(
+        menuName = SceneManagementConstants.CreateAssetMenuPrefix + "Scene Profile",
+        order = Constants.CreateAssetMenuOrder)]
+    public class SceneProfileSO : ScriptableObject
     {
-        [SerializeField] 
-         private SceneFieldReference _scene; 
+        [SerializeField]
+        private SceneFieldReference _scene;
 
         [SerializeField]
         private SceneFieldReference[] _additiveScenes;
 
         [AssetList]
         [SerializeField]
-        private SceneTypeProfile _typeProfile;
+        private SceneTypeProfileSO _typeProfile;
+
+        [SerializeField]
+        private AtomCollection _additionalData;
 
         [Title("Events")]
         [SerializeField]
@@ -26,8 +33,9 @@ namespace BestLostNFound
 
         public SceneField Scene => _scene.Value;
 
-        public SceneTypeProfile TypeProfile => _typeProfile;
+        public AtomCollection AdditionalData => _additionalData;
 
+        public SceneTypeProfileSO TypeProfile => _typeProfile;
 
         public void Editor_Load()
         {

@@ -1,31 +1,45 @@
-﻿using UnityEditor;
+﻿using System;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-// TODO move to the correct namespace
-namespace BestLostNFound
+namespace niscolas.UnityUtils.Extras
 {
     public static class MasterLoader
     {
+        public static event Action<SceneProfileSO> BeforeSceneProfileLoaded;
+        public static event Action<SceneProfileSO> AfterSceneProfileLoaded;
+
+        public static SceneProfileSO CurrentSceneProfile => _currentSceneProfile;
+        
         public static bool ShouldLoadAdditiveScenes =>
             !Application.isEditor ||
             Application.isEditor && _enteredPlayMode;
 
-        private const string ProfilePath = nameof(MasterLoaderProfile);
+        private const string ProfilePath = "MasterLoaderProfile";
 
-        private static MasterLoaderProfile _profile;
+        private static MasterLoaderProfileSO _profile;
+        private static SceneProfileSO _currentSceneProfile;
         private static bool _enteredPlayMode;
 
-#if UNITY_EDITOR
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
-        static void Init()
+        private static void Init()
         {
+#if UNITY_EDITOR
             _enteredPlayMode = false;
 
-            EditorApplication.playModeStateChanged -= PlayModeStateChanged;
             EditorApplication.playModeStateChanged += PlayModeStateChanged;
+#endif
+            
+            if (!TryFindProfile(out _profile))
+            {
+                return;
+            }
+
+            SceneManager.sceneLoaded += SceneManager_OnSceneLoaded;
         }
 
+#if UNITY_EDITOR
         private static void PlayModeStateChanged(PlayModeStateChange playModeStateChange)
         {
             if (playModeStateChange != PlayModeStateChange.EnteredPlayMode)
@@ -37,18 +51,7 @@ namespace BestLostNFound
         }
 #endif
 
-        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-        private static void RuntimeInit()
-        {
-            if (!TryFindProfile(out _profile))
-            {
-                return;
-            }
-
-            SceneManager.sceneLoaded += SceneManager_OnSceneLoaded;
-        }
-
-        public static bool TryFindProfile(out MasterLoaderProfile profile)
+        public static bool TryFindProfile(out MasterLoaderProfileSO profile)
         {
             profile = _profile;
             if (_profile)
@@ -56,24 +59,31 @@ namespace BestLostNFound
                 return true;
             }
 
-            profile = Resources.Load<MasterLoaderProfile>(ProfilePath);
-            return _profile;
+            profile = Resources.Load<MasterLoaderProfileSO>(ProfilePath);
+            return profile;
         }
 
         private static void SceneManager_OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
         {
+            if (loadSceneMode == LoadSceneMode.Additive)
+            {
+                return;
+            }
+            
             OnSceneLoaded(scene);
         }
 
         private static void OnSceneLoaded(Scene scene)
         {
-            if (!TryFindProfile(out _profile) ||
-                !_profile.SceneProfiles.TryGet(scene, out SceneProfile sceneProfile))
+            if (!_profile ||
+                !_profile.SceneProfiles.TryGet(scene, out _currentSceneProfile))
             {
                 return;
             }
 
-            sceneProfile.OnLoaded();
+            BeforeSceneProfileLoaded?.Invoke(_currentSceneProfile);
+            _currentSceneProfile.OnLoaded();
+            AfterSceneProfileLoaded?.Invoke(_currentSceneProfile);
         }
     }
 }

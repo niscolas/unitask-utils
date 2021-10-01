@@ -1,14 +1,17 @@
 ﻿using System.Linq;
+using niscolas.UnityUtils.Core;
 using Sirenix.OdinInspector;
 using UnityAtoms.SceneMgmt;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
-namespace BestLostNFound
+namespace niscolas.UnityUtils.Extras
 {
-    [CreateAssetMenu(menuName = SceneManagementConstants.BaseCreateSoAssetMenuPath + "Scene Type Profile")]
-    public class SceneTypeProfile : ScriptableObject
+    [CreateAssetMenu(
+        menuName = SceneManagementConstants.CreateAssetMenuPrefix + "Scene Type Profile",
+        order = Constants.CreateAssetMenuOrder)]
+    public class SceneTypeProfileSO : ScriptableObject
     {
         [SerializeField]
         private SceneFieldReference[] _additiveScenes;

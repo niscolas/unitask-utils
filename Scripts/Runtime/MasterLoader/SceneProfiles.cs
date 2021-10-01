@@ -5,21 +5,21 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace BestLostNFound
+namespace niscolas.UnityUtils.Extras
 {
     [Serializable]
-    public class SceneProfiles : IEnumerable<SceneProfile>
+    public class SceneProfiles : IEnumerable<SceneProfileSO>
     {
         [SerializeField]
-        private List<SceneProfile> _content;
+        private List<SceneProfileSO> _content;
 
-        public bool TryGet(Scene scene, out SceneProfile profile)
+        public bool TryGet(Scene scene, out SceneProfileSO profile)
         {
             profile = _content.FirstOrDefault(currentProfile => currentProfile.Scene.SceneName == scene.name);
             return profile;
         }
 
-        public IEnumerator<SceneProfile> GetEnumerator()
+        public IEnumerator<SceneProfileSO> GetEnumerator()
         {
             return _content.GetEnumerator();
         }

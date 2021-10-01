@@ -6,7 +6,7 @@ using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace BestLostNFound
+namespace niscolas.UnityUtils.Extras
 {
     public static class SceneManagerUtility
     {
