@@ -4,63 +4,63 @@ using niscolas.UnityUtils.UniTask;
 
 namespace UnityUtils
 {
-	public class TickSystem
-	{
-		private readonly Action _action;
-		private readonly float _intervalSec;
-		private bool _running;
+    public class TickSystem
+    {
+        private readonly Action _action;
+        private readonly float _intervalSec;
+        private bool _running;
 
-		private TickSystem(Action action, float intervalSec)
-		{
-			_action = action;
-			_intervalSec = intervalSec;
-		}
+        private TickSystem(Action action, float intervalSec)
+        {
+            _action = action;
+            _intervalSec = intervalSec;
+        }
 
-		public static TickSystem New(Action action, float intervalSec)
-		{
-			TickSystem tickSystem = new TickSystem(action, intervalSec);
+        public static TickSystem New(Action action, float intervalSec)
+        {
+            TickSystem tickSystem = new TickSystem(action, intervalSec);
 
-			return tickSystem;
-		}
+            return tickSystem;
+        }
 
-		public static TickSystem StartNew(Action action, float intervalSec)
-		{
-			TickSystem tickSystem = New(action, intervalSec);
-			tickSystem.Start();
+        public static TickSystem StartNew(Action action, float intervalSec)
+        {
+            TickSystem tickSystem = New(action, intervalSec);
+            tickSystem.Start().Forget();
 
-			return tickSystem;
-		}
+            return tickSystem;
+        }
 
-		public async void Start()
-		{
-			if (_running)
-			{
-				return;
-			}
+        public async UniTaskVoid Start()
+        {
+            if (_running)
+            {
+                return;
+            }
 
-			_running = true;
-			
-			while (true)
-			{
-				await Await.Seconds(_intervalSec);
-				
-				if (!_running)
-				{
-					break;
-				}
+            _running = true;
 
-				DoTick();
-			}
-		}
+            while (true)
+            {
+                await Await.Seconds(_intervalSec);
 
-		private void DoTick()
-		{
-			_action?.Invoke();
-		}
+                if (!_running)
+                {
+                    break;
+                }
 
-		public void Stop()
-		{
-			_running = false;
-		}
-	}
+                DoTick();
+            }
+        }
+
+        private void DoTick()
+        {
+            _action?.Invoke();
+        }
+
+        public void Stop()
+        {
+            _running = false;
+        }
+    }
 }
