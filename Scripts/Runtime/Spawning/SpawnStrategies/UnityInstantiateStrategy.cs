@@ -4,6 +4,6 @@ using UnityUtils;
 
 namespace niscolas.UnityUtils
 {
-	[CreateAssetMenu(menuName = Constants.CreateAssetMenuPrefix + "Unity Instantiate Strategy")]
+	[CreateAssetMenu(menuName = Constants.CoreCreateAssetMenuPrefix + "Unity Instantiate Strategy")]
 	public class UnityInstantiateStrategy : ServiceBasedSpawnStrategy<UnityInstantiateService> { }
 }

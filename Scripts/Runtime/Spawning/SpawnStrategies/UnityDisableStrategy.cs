@@ -4,6 +4,6 @@ using UnityUtils;
 
 namespace niscolas.UnityUtils.Extras
 {
-	[CreateAssetMenu(menuName = Constants.CreateAssetMenuPrefix + "Unity Disable Strategy")]
+	[CreateAssetMenu(menuName = Constants.CoreCreateAssetMenuPrefix + "Unity Disable Strategy")]
 	public class UnityDisableStrategy : ServiceBasedDespawnStrategy<UnityDisableService> { }
 }
