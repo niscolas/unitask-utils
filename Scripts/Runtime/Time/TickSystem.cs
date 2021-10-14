@@ -2,65 +2,106 @@
 using Cysharp.Threading.Tasks;
 using niscolas.UnityUtils.UniTask;
 
-namespace UnityUtils
+namespace niscolas.UnityUtils.Extras
 {
     public class TickSystem
     {
-        private readonly Action _action;
-        private readonly float _intervalSec;
+        public struct Data
+        {
+            public float ElapsedTime;
+            public int TickCount;
+
+            public Data(float elapsedTime, int tickCount)
+            {
+                ElapsedTime = elapsedTime;
+                TickCount = tickCount;
+            }
+        }
+
+        private readonly Action<Data> _tickCallback;
+        private readonly Action<Data> _stoppedCallback;
+        private readonly float _intervalSeconds;
+
+        private Data _data;
         private bool _running;
 
-        private TickSystem(Action action, float intervalSec)
+        public TickSystem(
+            float intervalSeconds,
+            Action<Data> tickCallback,
+            Action<Data> stoppedCallback = null)
         {
-            _action = action;
-            _intervalSec = intervalSec;
+            _intervalSeconds = intervalSeconds;
+
+            _tickCallback = tickCallback;
+            _stoppedCallback = stoppedCallback;
+
+            _data = new Data();
+            _running = false;
         }
 
-        public static TickSystem New(Action action, float intervalSec)
+        public static TickSystem StartNew(
+            float intervalSeconds,
+            Action<Data> tickCallback,
+            Action<Data> stoppedCallback = null)
         {
-            TickSystem tickSystem = new TickSystem(action, intervalSec);
+            TickSystem tickSystem = new TickSystem(
+                intervalSeconds, tickCallback, stoppedCallback);
+            tickSystem.Start();
 
             return tickSystem;
         }
 
-        public static TickSystem StartNew(Action action, float intervalSec)
+        public void Start()
         {
-            TickSystem tickSystem = New(action, intervalSec);
-            tickSystem.Start().Forget();
-
-            return tickSystem;
+            StartAsync().Forget();
         }
 
-        public async UniTaskVoid Start()
+        private async UniTaskVoid StartAsync()
         {
             if (_running)
             {
                 return;
             }
 
-            _running = true;
+            ResetState();
 
             while (true)
             {
-                await Await.Seconds(_intervalSec);
+                await Await.Seconds(_intervalSeconds);
 
                 if (!_running)
                 {
                     break;
                 }
 
+                IncrementData();
+
                 DoTick();
             }
         }
 
+        private void ResetState()
+        {
+            _data.ElapsedTime = 0;
+            _data.TickCount = 0;
+            _running = true;
+        }
+
+        private void IncrementData()
+        {
+            _data.ElapsedTime += _intervalSeconds;
+            _data.TickCount++;
+        }
+
         private void DoTick()
         {
-            _action?.Invoke();
+            _tickCallback?.Invoke(_data);
         }
 
         public void Stop()
         {
             _running = false;
+            _stoppedCallback?.Invoke(_data);
         }
     }
 }
