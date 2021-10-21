@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace niscolas.UnityUtils.Extras
 {
-	[CreateAssetMenu(menuName = Constants.ActionsCreateAssetMenuPath + "(GameObject) => Despawn")]
+	[CreateAssetMenu(menuName = UnityAtomsConstants.ActionsCreateAssetMenuPrefix + "(GameObject) => Despawn")]
 	public class DespawnGameObject : AtomAction<GameObject>
 	{
 		[SerializeField]

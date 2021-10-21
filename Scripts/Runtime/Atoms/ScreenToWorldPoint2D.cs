@@ -4,7 +4,7 @@ using UnityEngine;
 namespace niscolas.UnityUtils.UnityAtoms
 {
 	[CreateAssetMenu(menuName =
-		Constants.FunctionsCreateAssetMenuPath + "(Vector2) => Screen To World Point")]
+		UnityAtomsConstants.FunctionsCreateAssetMenuPrefix + "(Vector2) => Screen To World Point")]
 	public class ScreenToWorldPoint2D : Vector2Vector2Function
 	{
 		private Camera mainCamera;

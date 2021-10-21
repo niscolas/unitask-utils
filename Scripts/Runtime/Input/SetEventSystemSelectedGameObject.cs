@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 namespace niscolas.UnityUtils.UnityAtoms
 {
 	[CreateAssetMenu(
-		menuName = Constants.ActionsCreateAssetMenuPath + "(GameObject) => Set Event System First Selected")]
+		menuName = UnityAtomsConstants.ActionsCreateAssetMenuPrefix + "(GameObject) => Set Event System First Selected")]
 	public class SetEventSystemSelectedGameObject : AtomAction<GameObject>
 	{
 		public override void Do(GameObject entry)

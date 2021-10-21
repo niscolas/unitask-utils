@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace niscolas.UnityUtils.UnityAtoms
 {
-	[CreateAssetMenu(menuName = Constants.ActionsCreateAssetMenuPath + "(int) => Set VSync Count")]
+	[CreateAssetMenu(menuName = UnityAtomsConstants.ActionsCreateAssetMenuPrefix + "(int) => Set VSync Count")]
 	public class SetVSyncCount : AtomAction<int>
 	{
 		[SerializeField]

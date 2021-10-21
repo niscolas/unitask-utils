@@ -1,12 +1,13 @@
 using niscolas.UnityUtils.Core;
+using niscolas.UnityUtils.UnityAtoms;
 using UnityAtoms.BaseAtoms;
 using UnityEngine;
-using Constants = niscolas.UnityUtils.UnityAtoms.Constants;
 
 namespace niscolas.UnityUtils.Extras
 {
-    [CreateAssetMenu(menuName = Constants.FunctionsFolderPath + "(GameObject) => Select Root : GameObject")]
-    public class SelectRootAtom : GameObjectGameObjectFunction
+    [CreateAssetMenu(
+        menuName = UnityAtomsConstants.FunctionsCreateAssetMenuPrefix + "(GameObject) => Select Root : GameObject")]
+    public class SelectRootAtomFunction : GameObjectGameObjectFunction
     {
         public override GameObject Call(GameObject gameObject)
         {

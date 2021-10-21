@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace niscolas.UnityUtils.UnityAtoms
 {
-	[CreateAssetMenu(menuName = Constants.ActionsCreateAssetMenuPath + "(bool) => Toggle Bool?")]
+	[CreateAssetMenu(menuName = UnityAtomsConstants.ActionsCreateAssetMenuPrefix + "(bool) => Toggle Bool?")]
 	public class ToggleBool : AtomAction<bool>
 	{
 		[SerializeField]

@@ -7,7 +7,7 @@ using UnityEngine;
 namespace niscolas.UnityUtils.UnityAtoms
 {
     [CreateAssetMenu(
-        menuName = Constants.FunctionsCreateAssetMenuPath + "(float) => Arithmetic Operation : float")]
+        menuName = UnityAtomsConstants.FunctionsCreateAssetMenuPrefix + "(float) => Arithmetic Operation : float")]
     public class FloatArithmeticOperation : FloatFloatFunction
     {
         [SerializeField]

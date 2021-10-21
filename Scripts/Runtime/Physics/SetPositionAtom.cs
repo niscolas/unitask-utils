@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace niscolas.UnityUtils.UnityAtoms
 {
-	[CreateAssetMenu(menuName = Constants.ActionsCreateAssetMenuPath + "(GameObject) => Set Position")]
+	[CreateAssetMenu(menuName = UnityAtomsConstants.ActionsCreateAssetMenuPrefix + "(GameObject) => Set Position")]
 	public class SetPositionAtom : AtomAction<GameObject>
 	{
 		[SerializeField]

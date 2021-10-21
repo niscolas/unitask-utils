@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace niscolas.UnityUtils.Extras
 {
-    [CreateAssetMenu(menuName = Constants.ActionsCreateAssetMenuPath + "(GameObject) => Spawn : GameObject")]
+    [CreateAssetMenu(menuName = UnityAtomsConstants.ActionsCreateAssetMenuPrefix + "(GameObject) => Spawn : GameObject")]
     public class SpawnGameObject : AtomFunction<GameObject, GameObject>
     {
         [SerializeField]

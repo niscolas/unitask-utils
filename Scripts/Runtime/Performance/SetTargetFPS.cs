@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace niscolas.UnityUtils.UnityAtoms
 {
-	[CreateAssetMenu(menuName = Constants.ActionsCreateAssetMenuPath + "(int) => Set Target FPS")]
+	[CreateAssetMenu(menuName = UnityAtomsConstants.ActionsCreateAssetMenuPrefix + "(int) => Set Target FPS")]
 	public class SetTargetFPS : AtomAction<int>
 	{
 		[SerializeField]

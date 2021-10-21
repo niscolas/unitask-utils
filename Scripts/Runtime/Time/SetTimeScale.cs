@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace niscolas.UnityUtils.UnityAtoms
 {
-	[CreateAssetMenu(menuName = Constants.ActionsCreateAssetMenuPath + "(float) => Set Time Scale")]
+	[CreateAssetMenu(menuName = UnityAtomsConstants.ActionsCreateAssetMenuPrefix + "(float) => Set Time Scale")]
 	public class SetTimeScale : AtomAction<float>
 	{
 		[SerializeField]

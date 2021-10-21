@@ -7,7 +7,7 @@ using UnityEngine.Serialization;
 namespace niscolas.UnityUtils.UnityAtoms
 {
     [CreateAssetMenu(
-        menuName = Constants.FunctionsCreateAssetMenuPath + "(float) => log(x) : float")]
+        menuName = UnityAtomsConstants.FunctionsCreateAssetMenuPrefix + "(float) => log(x) : float")]
     public class FloatLogarithm : FloatFloatFunction
     {
         [FormerlySerializedAs("logBase"), SerializeField]

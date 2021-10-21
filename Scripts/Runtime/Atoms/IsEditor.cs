@@ -3,7 +3,7 @@
 namespace niscolas.UnityUtils.UnityAtoms
 {
     [CreateAssetMenu(
-        menuName = Constants.ConditionsCreateAssetMenuPath + "() => Is Editor?")]
+        menuName = UnityAtomsConstants.ConditionsCreateAssetMenuPrefix + "() => Is Editor?")]
     public class IsEditor : VoidCondition
     {
         [SerializeField]

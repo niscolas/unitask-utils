@@ -3,7 +3,7 @@
 namespace niscolas.UnityUtils.UnityAtoms
 {
 	[CreateAssetMenu(
-		menuName = Constants.ActionsCreateAssetMenuPath + "(Animator) => Set Bool")]
+		menuName = UnityAtomsConstants.ActionsCreateAssetMenuPrefix + "(Animator) => Set Bool")]
 	public class SetAnimatorBool : BaseSetAnimatorParam<bool>
 	{
 		public override void Do(Animator animator)

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace niscolas.UnityUtils.UnityAtoms
 {
-    [CreateAssetMenu(menuName = Constants.ActionsCreateAssetMenuPath + "(float) => Math Operation")]
+    [CreateAssetMenu(menuName = UnityAtomsConstants.ActionsCreateAssetMenuPrefix + "(float) => Math Operation")]
     public class FloatMathOperation : BaseMathOperation<FloatVariable, FloatReference, float>
     {
         protected override void Inner_Do(float operand2)

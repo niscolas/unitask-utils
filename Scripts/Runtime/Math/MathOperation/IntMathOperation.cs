@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace niscolas.UnityUtils.UnityAtoms
 {
-    [CreateAssetMenu(menuName = Constants.ActionsCreateAssetMenuPath + "(int) => Math Operation")]
+    [CreateAssetMenu(menuName = UnityAtomsConstants.ActionsCreateAssetMenuPrefix + "(int) => Math Operation")]
     public class IntMathOperation : BaseMathOperation<IntVariable, IntReference, int>
     {
         protected override void Inner_Do(int operand2)

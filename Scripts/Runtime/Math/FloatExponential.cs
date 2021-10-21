@@ -7,7 +7,7 @@ using UnityEngine.Serialization;
 namespace niscolas.UnityUtils.UnityAtoms
 {
     [CreateAssetMenu(
-        menuName = Constants.FunctionsCreateAssetMenuPath + "(float) => exp(x) : float")]
+        menuName = UnityAtomsConstants.FunctionsCreateAssetMenuPrefix + "(float) => exp(x) : float")]
     public class FloatExponential : FloatFloatFunction
     {
         [SerializeField]

@@ -5,7 +5,7 @@ namespace niscolas.UnityUtils.UnityAtoms
 {
     [CreateAssetMenu
     (
-        menuName = Constants.FunctionsCreateAssetMenuPath + "(GameObject) => Select Parent : GameObject"
+        menuName = UnityAtomsConstants.FunctionsCreateAssetMenuPrefix + "(GameObject) => Select Parent : GameObject"
     )]
     public class SelectParentAtom : GameObjectGameObjectFunction
     {

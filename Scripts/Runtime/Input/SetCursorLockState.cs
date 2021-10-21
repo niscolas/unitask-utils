@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace niscolas.UnityUtils.UnityAtoms
 {
-	[CreateAssetMenu(menuName = Constants.ActionsCreateAssetMenuPath + "Set Cursor Lock State")]
+	[CreateAssetMenu(menuName = UnityAtomsConstants.ActionsCreateAssetMenuPrefix + "Set Cursor Lock State")]
 	public class SetCursorLockState : AtomAction<CursorLockMode>
 	{
 		[SerializeField]

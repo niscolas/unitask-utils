@@ -5,7 +5,7 @@ using UnityEngine.Audio;
 namespace niscolas.UnityUtils.UnityAtoms
 {
 	[CreateAssetMenu(
-		menuName = Constants.ActionsCreateAssetMenuPath + "(float) => Set Exposed Audio Mixer Parameter")]
+		menuName = UnityAtomsConstants.ActionsCreateAssetMenuPrefix + "(float) => Set Exposed Audio Mixer Parameter")]
 	public class SetAudioMixerExposedFloatParameter : FloatAction
 	{
 		[SerializeField]
