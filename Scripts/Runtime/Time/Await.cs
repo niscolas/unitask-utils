@@ -24,6 +24,11 @@ namespace niscolas.UnityUtils.UniTask
             }
         }
 
+        public static CysharpUniTask Frame(PlayerLoopTiming playerLoopTiming = PlayerLoopTiming.Update)
+        {
+            return Frames(1, playerLoopTiming);
+        }
+
         public static CysharpUniTask Frames(int count, PlayerLoopTiming playerLoopTiming = PlayerLoopTiming.Update)
         {
             return Frames(count, TaskHolderGameObject, playerLoopTiming);
