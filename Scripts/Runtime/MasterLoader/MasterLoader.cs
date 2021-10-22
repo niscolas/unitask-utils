@@ -21,15 +21,20 @@ namespace niscolas.UnityUtils.Extras
 
         private static bool _enteredPlayMode;
 
-        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+#if UNITY_EDITOR
+        [InitializeOnLoadMethod]
         private static void Init()
         {
-#if UNITY_EDITOR
+            TheBugger.LogRealWarning("Init");
             _enteredPlayMode = false;
 
             EditorApplication.playModeStateChanged += PlayModeStateChanged;
+        }
 #endif
-            
+
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+        private static void RuntimeInit()
+        {
             if (!TryFindProfile(out _profile))
             {
                 return;
@@ -41,12 +46,15 @@ namespace niscolas.UnityUtils.Extras
 #if UNITY_EDITOR
         private static void PlayModeStateChanged(PlayModeStateChange playModeStateChange)
         {
-            if (playModeStateChange != PlayModeStateChange.EnteredPlayMode)
+            if (playModeStateChange == PlayModeStateChange.EnteredPlayMode)
             {
-                return;
+                _enteredPlayMode = true;
             }
-
-            _enteredPlayMode = true;
+            else
+            {
+                SceneManager.sceneLoaded -= SceneManager_OnSceneLoaded;
+                _enteredPlayMode = false;
+            }
         }
 
 #endif
@@ -69,7 +77,7 @@ namespace niscolas.UnityUtils.Extras
             {
                 return;
             }
-            
+
             OnSceneLoaded(scene);
         }
 
@@ -89,7 +97,7 @@ namespace niscolas.UnityUtils.Extras
         public static bool TryFindCurrentSceneProfile(out SceneProfileSO currentSceneProfile)
         {
             currentSceneProfile = default;
-            
+
             Scene currentScene = SceneManager.GetActiveScene();
 
             if (!TryFindProfile(out MasterLoaderProfileSO profile) ||
@@ -100,7 +108,7 @@ namespace niscolas.UnityUtils.Extras
                     $"couldn't load {nameof(SceneProfileSO)}...");
                 return false;
             }
-            
+
             return currentSceneProfile;
         }
     }
