@@ -1,10 +1,10 @@
-﻿namespace niscolas.UnityUtils.UniTask
+﻿namespace niscolas.UnityUtils.Extras
 {
     public class DelayedOnEnableEvent : BaseDelayedMonoEvent
     {
         private void OnEnable()
         {
-            Raise();
+            Raise().Forget();
         }
     }
 }

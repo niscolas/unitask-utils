@@ -1,8 +1,8 @@
 using System;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
-using CysharpUniTask = Cysharp.Threading.Tasks.UniTask;
 
-namespace niscolas.UnityUtils.UniTask
+namespace niscolas.UnityUtils.Extras
 {
     [Serializable]
     public class SecondsDelayData
@@ -10,12 +10,12 @@ namespace niscolas.UnityUtils.UniTask
         [SerializeField]
         private float _count = 1;
 
-        public CysharpUniTask Wait()
+        public UniTask Wait()
         {
             return Await.Seconds(_count);
         }
-        
-        public CysharpUniTask Wait(GameObject gameObject)
+
+        public UniTask Wait(GameObject gameObject)
         {
             return Await.Seconds(_count, gameObject);
         }

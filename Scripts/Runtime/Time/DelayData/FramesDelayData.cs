@@ -1,9 +1,8 @@
 using System;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
-using CysharpUniTask = Cysharp.Threading.Tasks.UniTask;
 
-namespace niscolas.UnityUtils.UniTask
+namespace niscolas.UnityUtils.Extras
 {
     [Serializable]
     public class FramesDelayData
@@ -14,12 +13,12 @@ namespace niscolas.UnityUtils.UniTask
         [SerializeField]
         private PlayerLoopTiming _playerLoopTiming = PlayerLoopTiming.Update;
 
-        public CysharpUniTask Wait()
+        public UniTask Wait()
         {
             return Await.Frames(_count, _playerLoopTiming);
         }
 
-        public CysharpUniTask Wait(GameObject gameObject)
+        public UniTask Wait(GameObject gameObject)
         {
             return Await.Frames(_count, gameObject, _playerLoopTiming);
         }

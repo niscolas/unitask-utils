@@ -1,9 +1,7 @@
-﻿using niscolas.UnityUtils.Core;
-
-namespace niscolas.UnityUtils.Extras
+﻿namespace niscolas.UnityUtils.Extras
 {
     public static class SceneManagementConstants
     {
-        public const string CreateAssetMenuPrefix = Constants.CoreCreateAssetMenuPrefix + "Scene Management/";
+        public const string CreateAssetMenuPrefix = Core.Constants.CreateAssetMenuPrefix + "Scene Management/";
     }
 }

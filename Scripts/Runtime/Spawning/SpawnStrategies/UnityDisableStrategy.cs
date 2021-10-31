@@ -1,9 +1,9 @@
-﻿using niscolas.UnityUtils.Core;
-using UnityEngine;
-using UnityUtils;
+﻿using UnityEngine;
 
 namespace niscolas.UnityUtils.Extras
 {
-	[CreateAssetMenu(menuName = Constants.CoreCreateAssetMenuPrefix + "Unity Disable Strategy")]
-	public class UnityDisableStrategy : ServiceBasedDespawnStrategy<UnityDisableService> { }
+    [CreateAssetMenu(
+        menuName = Constants.CreateAssetMenuPrefix + "Unity Disable Strategy",
+        order = Core.Constants.CreateAssetMenuOrder)]
+    public class UnityDisableStrategy : ServiceBasedDespawnStrategy<UnityDisableService> { }
 }

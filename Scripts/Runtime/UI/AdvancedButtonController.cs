@@ -1,8 +1,8 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
-using niscolas.UnityUtils.UniTask;
+using DefaultNamespace;
 
-namespace DefaultNamespace
+namespace niscolas.UnityUtils.Extras
 {
     public class AdvancedButtonController
     {

@@ -25,7 +25,6 @@ namespace niscolas.UnityUtils.Extras
         [InitializeOnLoadMethod]
         private static void Init()
         {
-            TheBugger.LogRealWarning("Init");
             _enteredPlayMode = false;
 
             EditorApplication.playModeStateChanged += PlayModeStateChanged;

@@ -1,10 +1,9 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
-using CysharpUniTask = Cysharp.Threading.Tasks.UniTask;
 using Object = UnityEngine.Object;
 
-namespace niscolas.UnityUtils.UniTask
+namespace niscolas.UnityUtils.Extras
 {
     public static class Await
     {
@@ -24,24 +23,24 @@ namespace niscolas.UnityUtils.UniTask
             }
         }
 
-        public static CysharpUniTask Frame(PlayerLoopTiming playerLoopTiming = PlayerLoopTiming.Update)
+        public static UniTask Frame(PlayerLoopTiming playerLoopTiming = PlayerLoopTiming.Update)
         {
             return Frames(1, playerLoopTiming);
         }
 
-        public static CysharpUniTask Frames(int count, PlayerLoopTiming playerLoopTiming = PlayerLoopTiming.Update)
+        public static UniTask Frames(int count, PlayerLoopTiming playerLoopTiming = PlayerLoopTiming.Update)
         {
             return Frames(count, TaskHolderGameObject, playerLoopTiming);
         }
 
-        public static CysharpUniTask Frames
+        public static UniTask Frames
         (
             int count,
             GameObject gameObject,
             PlayerLoopTiming playerLoopTiming = PlayerLoopTiming.Update
         )
         {
-            return CysharpUniTask.DelayFrame
+            return UniTask.DelayFrame
             (
                 count,
                 playerLoopTiming,
@@ -49,14 +48,14 @@ namespace niscolas.UnityUtils.UniTask
             );
         }
 
-        public static CysharpUniTask Seconds(float seconds)
+        public static UniTask Seconds(float seconds)
         {
             return Seconds(seconds, TaskHolderGameObject);
         }
 
-        public static CysharpUniTask Seconds(float seconds, GameObject gameObject)
+        public static UniTask Seconds(float seconds, GameObject gameObject)
         {
-            return CysharpUniTask.Delay
+            return UniTask.Delay
             (
                 TimeSpan.FromSeconds(seconds),
                 cancellationToken: gameObject.GetCancellationTokenOnDestroy()

@@ -1,6 +1,5 @@
 ﻿using System;
-using Cysharp.Threading.Tasks;
-using niscolas.UnityUtils.UniTask;
+using niscolas.UnityUtils.Extras;
 using UnityAtoms.BaseAtoms;
 using UnityEngine;
 using UnityEngine.Events;

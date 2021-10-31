@@ -1,6 +1,5 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
-using niscolas.UnityUtils.UniTask;
 
 namespace niscolas.UnityUtils.Extras
 {

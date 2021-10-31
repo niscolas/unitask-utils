@@ -11,7 +11,7 @@ namespace niscolas.UnityUtils.Extras
 {
     [CreateAssetMenu(
         menuName = SceneManagementConstants.CreateAssetMenuPrefix + "Scene Profile",
-        order = Constants.CreateAssetMenuOrder)]
+        order = Core.Constants.CreateAssetMenuOrder)]
     public class SceneProfileSO : ScriptableObject
     {
         [SerializeField]

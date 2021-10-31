@@ -1,7 +1,8 @@
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace niscolas.UnityUtils.UniTask
+namespace niscolas.UnityUtils.Extras
 {
     public class BaseDelayedMonoEvent : MonoBehaviour
     {
@@ -15,7 +16,7 @@ namespace niscolas.UnityUtils.UniTask
         [SerializeField]
         private UnityEvent _event;
 
-        protected async void Raise()
+        protected async UniTaskVoid Raise()
         {
             await _framesDelay.Wait(gameObject);
             await _secondsDelay.Wait(gameObject);

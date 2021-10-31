@@ -1,11 +1,12 @@
 ﻿using DefaultNamespace;
+using niscolas.UnityUtils.Extras;
 using UnityAtoms.BaseAtoms;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
 
-namespace Interaction
+namespace niscolas.UnityUtils.Extras
 {
     public class AdvancedButton : MonoBehaviour,
         IPointerClickHandler,
@@ -25,10 +26,10 @@ namespace Interaction
         [Header("Events")]
         [SerializeField]
         private UnityEvent _onPointerDown;
-        
+
         [SerializeField]
         private UnityEvent _clickEvent;
-        
+
         [SerializeField]
         private UnityEvent _onPointerUp;
 

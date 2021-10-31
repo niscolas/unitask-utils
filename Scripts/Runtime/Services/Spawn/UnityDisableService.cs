@@ -1,4 +1,4 @@
-﻿using niscolas.UnityUtils.UniTask;
+﻿using niscolas.UnityUtils.Extras;
 using UnityEngine;
 using UnityUtils;
 
