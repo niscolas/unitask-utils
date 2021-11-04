@@ -23,7 +23,7 @@ namespace niscolas.UnityUtils.Extras
 
         protected override void Start()
         {
-            _rigidbody = gameObject.IfNullGetComponentFromRoot(_rigidbody);
+            gameObject.IfUnityNullGetComponentFromRoot(ref _rigidbody);
             base.Start();
         }
 

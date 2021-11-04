@@ -15,10 +15,10 @@ namespace niscolas.UnityUtils
 			}
 		}
 
-		public async void Despawn(GameObject instance, float delay = 0, bool immediate = false)
+		public async void Despawn(GameObject gameObject, float delay = 0, bool immediate = false)
 		{
-			await Await.Seconds(delay, instance);
-			instance.SetActive(false);
+			await Await.Seconds(delay, gameObject);
+			gameObject.SetActive(false);
 		}
 	}
 }

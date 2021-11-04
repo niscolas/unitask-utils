@@ -6,7 +6,7 @@ using UnityEngine;
 namespace niscolas.UnityUtils.Extras
 {
     // TODO move this logic to new ScriptableTween
-    public class SimpleRotationTween : MonoBehaviour
+    public class DOTweenSimpleRotation : MonoBehaviour
     {
         [SerializeField]
         private bool _overwriteStartRotation;
