@@ -42,6 +42,14 @@ namespace niscolas.UnityUtils.Extras
 
         [FoldoutGroup("Tween Settings")]
         [SerializeField]
+        private UpdateType _updateType = UpdateType.Normal;
+
+        [FoldoutGroup("Tween Settings")]
+        [SerializeField]
+        private bool _isIndependentUpdate;
+
+        [FoldoutGroup("Tween Settings")]
+        [SerializeField]
         private bool _autoKill;
 
         [FoldoutGroup("Tween Settings")]
@@ -109,6 +117,7 @@ namespace niscolas.UnityUtils.Extras
         {
             tweener
                 .SetRelative(_toIsRelative)
+                .SetUpdate(_updateType, _isIndependentUpdate)
                 .SetLink(GetLinkTarget(), _linkBehaviour)
                 .SetAutoKill(_autoKill)
                 .SetLoops(_loopCount.Value, _loopType)
