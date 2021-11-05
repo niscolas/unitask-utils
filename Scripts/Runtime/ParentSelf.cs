@@ -15,7 +15,7 @@ namespace niscolas.UnityUtils.Extras
         private bool _resetTransform;
 
         [SerializeField]
-        private LifecycleMoment _moment = LifecycleMoment.Start;
+        private MonoCallbackType _moment = MonoCallbackType.Start;
 
         [Header("Events")]
         [SerializeField]
@@ -24,7 +24,7 @@ namespace niscolas.UnityUtils.Extras
         protected override void Awake()
         {
             base.Awake();
-            MonoLifeCycle.TriggerOnMoment(_gameObject, Do, _moment);
+            MonoHookManager.TriggerOnMoment(_gameObject, Do, _moment);
         }
 
         private void Do()

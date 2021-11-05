@@ -13,7 +13,7 @@ namespace niscolas.UnityUtils.Extras
         private Camera _cameraToAdd;
 
         [SerializeField]
-        private LifecycleMoment _addMoment = LifecycleMoment.Awake;
+        private MonoCallbackType _addMoment = MonoCallbackType.Awake;
 
         private GameObject _gameObject;
 
@@ -21,7 +21,7 @@ namespace niscolas.UnityUtils.Extras
         {
             _gameObject = gameObject;
             _gameObject.IfUnityNullGetComponent(ref _cameraToAdd);
-            MonoLifeCycle.TriggerOnMoment(_gameObject, Add, _addMoment);
+            MonoHookManager.TriggerOnMoment(_gameObject, Add, _addMoment);
         }
 
         private void Add()

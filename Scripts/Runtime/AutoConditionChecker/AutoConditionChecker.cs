@@ -9,7 +9,7 @@ namespace niscolas.UnityUtils.Extras
     public abstract class AutoConditionChecker<T> : CachedMonoBehaviour
     {
         [SerializeField]
-        private LifecycleMoment _conditionCheckMoment = LifecycleMoment.Awake;
+        private MonoCallbackType _conditionCheckMoment = MonoCallbackType.Awake;
 
         [SerializeField]
         protected AtomConditions<T> _conditions;
@@ -24,7 +24,7 @@ namespace niscolas.UnityUtils.Extras
         protected override void Awake()
         {
             base.Awake();
-            MonoLifeCycle.TriggerOnMoment(_gameObject, CheckEnvironment, _conditionCheckMoment);
+            MonoHookManager.TriggerOnMoment(_gameObject, CheckEnvironment, _conditionCheckMoment);
         }
 
         protected virtual void CheckEnvironment()

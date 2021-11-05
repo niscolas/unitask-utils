@@ -22,7 +22,7 @@ namespace niscolas.UnityUtils.Extras
         [FoldoutGroup("General Settings")]
         [ShowIf(nameof(_autoStart))]
         [SerializeField]
-        private LifecycleMoment _autoStartMoment;
+        private MonoCallbackType _autoStartMoment;
 
         [FoldoutGroup("To")]
         [FormerlySerializedAs("_endPositionIsRelative"), SerializeField]
@@ -94,7 +94,7 @@ namespace niscolas.UnityUtils.Extras
 
             if (_autoStart)
             {
-                MonoLifeCycle.TriggerOnMoment(_gameObject, DoTween, _autoStartMoment);
+                MonoHookManager.TriggerOnMoment(_gameObject, DoTween, _autoStartMoment);
             }
         }
 
