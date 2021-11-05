@@ -1,164 +1,75 @@
 ﻿using DG.Tweening;
 using DG.Tweening.Core;
 using DG.Tweening.Plugins.Options;
-using niscolas.UnityUtils.Core;
 using Sirenix.OdinInspector;
-using UnityAtoms.BaseAtoms;
 using UnityEngine;
 using UnityEngine.Serialization;
-using UnityUtils;
 
 namespace niscolas.UnityUtils.Extras
 {
-    // TODO move this logic to new ScriptableTween
-    public class DOTweenSimpleMove : CachedMonoBehaviour
+    public class DOTweenSimpleMove : BaseDOTweenTransformOperation<Vector3, Vector3, VectorOptions>
     {
-        [FoldoutGroup("General Settings")]
-        [SerializeField]
-        private Transform _target;
-
-        [FoldoutGroup("General Settings")]
-        [SerializeField]
-        private bool _autoStart;
-
-        [FoldoutGroup("General Settings")]
-        [ShowIf(nameof(_autoStart))]
-        [SerializeField]
-        private LifecycleMoment _autoStartMoment;
-
         [FoldoutGroup("From")]
-        [FormerlySerializedAs("_overwriteStartPosition"), SerializeField]
-        private bool _setFrom;
-
-        [FoldoutGroup("From")]
-        [FormerlySerializedAs("_startPoint"), SerializeField]
-        private Transform _fromPoint;
-
-        [FoldoutGroup("From")]
-        [EnableIf(nameof(EnableFromPosition))]
-        [FormerlySerializedAs("_startPosition"), SerializeField]
-        private Vector3Reference _fromPosition;
-
-        [FoldoutGroup("From")]
+        [EnableIf(nameof(_setFrom))]
+        [FormerlySerializedAs("_fromPoint"), FormerlySerializedAs("_startPoint")]
         [SerializeField]
-        private bool _startPositionIsRelative;
+        private Transform _fromReferencePoint;
 
         [FoldoutGroup("To")]
-        [SerializeField]
-        private Vector3Reference _endPosition;
-
-        [FoldoutGroup("To")]
-        [SerializeField]
-        private Transform _endPoint;
-
-        [FoldoutGroup("To")]
-        [SerializeField]
-        private bool _endPositionIsRelative;
-
+        [FormerlySerializedAs("_endPoint"), SerializeField]
+        private Transform _toReferencePoint;
+        
         [FoldoutGroup("Tween Settings")]
         [SerializeField]
-        private FloatReference _duration;
+        protected bool _isLocal;
 
-        [FoldoutGroup("Tween Settings")]
-        [SerializeField]
-        private Ease _ease;
 
-        [FoldoutGroup("Tween Settings")]
-        [SerializeField]
-        private bool _isLocal;
-
-        [FoldoutGroup("Tween Settings")]
-        [SerializeField]
-        private LinkBehaviour _linkBehaviour;
-
-        [FoldoutGroup("Tween Settings")]
-        [SerializeField]
-        private bool _autoKill;
-
-        [FoldoutGroup("Tween Settings")]
-        [SerializeField]
-        private IntReference _loopCount;
-
-        [FoldoutGroup("Tween Settings")]
-        [SerializeField]
-        private LoopType _loopType;
-
-        private bool EnableFromPosition => !_fromPoint;
-
-        private Transform Target
-        {
-            get
-            {
-                if (!_target)
-                {
-                    _target = transform;
-                }
-
-                return _target;
-            }
-        }
-
-        protected override void Awake()
-        {
-            base.Awake();
-
-            if (_autoStart)
-            {
-                MonoLifeCycle.TriggerOnMoment(_gameObject, DoTween, _autoStartMoment);
-            }
-        }
-
-        public void DoTween()
+        protected override TweenerCore<Vector3, Vector3, VectorOptions> GetTweener()
         {
             TweenerCore<Vector3, Vector3, VectorOptions> tweener;
+
             if (!_isLocal)
             {
-                tweener = Target.DOMove(GetEndPosition(), _duration.Value);
+                tweener = Target.DOMove(GetTo(), _duration.Value);
             }
             else
             {
-                tweener = Target.DOLocalMove(GetEndPosition(), _duration.Value);
+                tweener = Target.DOLocalMove(GetTo(), _duration.Value);
             }
 
-            SetDefaultOptions(tweener);
+            return tweener;
         }
 
-        private void SetDefaultOptions(TweenerCore<Vector3, Vector3, VectorOptions> tween)
+        protected override void AfterSetDefaultOptions(
+            TweenerCore<Vector3, Vector3, VectorOptions> tweener)
         {
-            tween
-                .SetRelative(_endPositionIsRelative)
-                .SetLink(Target.gameObject, _linkBehaviour)
-                .SetAutoKill(_autoKill)
-                .SetLoops(_loopCount.Value, _loopType)
-                .SetEase(_ease);
-
             if (_setFrom)
             {
-                tween.From(GetStartPosition(), true, _startPositionIsRelative);
+                tweener.From(GetFrom(), _fromIsRelative);
             }
         }
 
-        private Vector3 GetStartPosition()
+        protected Vector3 GetFrom()
         {
-            if (_fromPoint)
+            if (_fromReferencePoint)
             {
-                return _fromPoint.position;
+                return _fromReferencePoint.position;
             }
             else
             {
-                return _fromPosition.Value;
+                return _from.Value;
             }
         }
 
-        private Vector3 GetEndPosition()
+        private Vector3 GetTo()
         {
-            if (_endPoint)
+            if (_toReferencePoint)
             {
-                return _endPoint.position;
+                return _toReferencePoint.position;
             }
             else
             {
-                return _endPosition.Value;
+                return _to.Value;
             }
         }
     }

@@ -1,86 +1,39 @@
 ﻿using DG.Tweening;
+using DG.Tweening.Core;
+using DG.Tweening.Plugins.Options;
 using Sirenix.OdinInspector;
-using UnityAtoms.BaseAtoms;
 using UnityEngine;
 
 namespace niscolas.UnityUtils.Extras
 {
-    // TODO move this logic to new ScriptableTween
-    public class DOTweenSimpleRotation : MonoBehaviour
+    public class DOTweenSimpleRotation : BaseDOTweenTransformOperation<Quaternion, Vector3, QuaternionOptions>
     {
         [SerializeField]
-        private bool _overwriteStartRotation;
+        private RotateMode _rotateMode = RotateMode.Fast;
 
-        [EnableIf(nameof(_overwriteStartRotation))]
+        [FoldoutGroup("Tween Settings")]
         [SerializeField]
-        private Vector3Reference _startRotation;
+        protected bool _isLocal;
 
-        [EnableIf(nameof(_overwriteStartRotation))]
-        [SerializeField]
-        private bool _startRotationIsRelative;
-
-        [SerializeField]
-        private Vector3Reference _endRotation;
-
-        [SerializeField]
-        private bool _endRotationIsRelative;
-
-        [SerializeField]
-        private FloatReference _duration;
-
-        [SerializeField]
-        private Ease _ease;
-
-        [SerializeField]
-        private IntReference _loopCount;
-
-        [SerializeField]
-        private LoopType _loopType;
-
-        private Transform _transform;
-
-        private void Awake()
+        protected override void AfterSetDefaultOptions(
+            TweenerCore<Quaternion, Vector3, QuaternionOptions> tweener)
         {
-            _transform = transform;
-        }
-
-        public void DoTween()
-        {
-            transform
-                .DORotate(GetEndRotation(), _duration.Value)
-                .From(GetStartRotation(), true, CheckStartRotationIsRelative())
-                .SetRelative(_endRotationIsRelative)
-                .SetLoops(_loopCount.Value, _loopType)
-                .SetEase(_ease);
-        }
-
-        private Vector3 GetStartRotation()
-        {
-            if (!_overwriteStartRotation)
+            if (_setFrom)
             {
-                return _transform.eulerAngles;
+                tweener.From(_from, _fromIsRelative);
+            }
+        }
+
+        protected override TweenerCore<Quaternion, Vector3, QuaternionOptions> GetTweener()
+        {
+            if (!_isLocal)
+            {
+                return Target.DORotate(_to, _duration, _rotateMode);
             }
             else
             {
-                return _startRotation.Value;
+                return Target.DOLocalRotate(_to, _duration, _rotateMode);
             }
-        }
-        
-        private bool CheckStartRotationIsRelative()
-        {
-            if (!_overwriteStartRotation)
-            {
-                return false;
-            }
-            else
-            {
-                return _startRotationIsRelative;
-            }
-        }
-
-        private Vector3 GetEndRotation()
-        {
-            return _endRotation.Value;
         }
     }
 }
