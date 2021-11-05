@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 465bf2a7f0f349edb3669f596f39c6c6, type: 3}
-  m_Name: Cond-CheckCurrentGameEnvironment-DebugBuild
+  m_Name: Cond-IsCurrentEnvironmentType-Build
   m_EditorClassIdentifier: 
   _developerDescription: 
-  _testGameEnvironment: 3
+  _testGameEnvironment: 2

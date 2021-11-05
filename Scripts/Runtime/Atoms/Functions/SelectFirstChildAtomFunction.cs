@@ -5,7 +5,7 @@ namespace niscolas.UnityUtils.UnityAtoms
 {
     [CreateAssetMenu(
         menuName = UnityAtomsConstants.FunctionsCreateAssetMenuPrefix + "(GameObject) => Select Child : GameObject")]
-    public class SelectFirstChild : GameObjectGameObjectFunction
+    public class SelectFirstChildAtomFunction : GameObjectGameObjectFunction
     {
         public override GameObject Call(GameObject entry)
         {

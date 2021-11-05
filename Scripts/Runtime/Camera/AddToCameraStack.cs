@@ -21,7 +21,7 @@ namespace niscolas.UnityUtils.Extras
         {
             _gameObject = gameObject;
             _gameObject.IfUnityNullGetComponent(ref _cameraToAdd);
-            MonoHookManager.TriggerOnMoment(_gameObject, Add, _addMoment);
+            MonoLifecycleHooksManager.TriggerOnMoment(_gameObject, Add, _addMoment);
         }
 
         private void Add()

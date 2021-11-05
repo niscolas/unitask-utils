@@ -24,7 +24,7 @@ namespace niscolas.UnityUtils.Extras
         protected override void Awake()
         {
             base.Awake();
-            MonoHookManager.TriggerOnMoment(_gameObject, Do, _moment);
+            MonoLifecycleHooksManager.TriggerOnMoment(_gameObject, Do, _moment);
         }
 
         private void Do()
