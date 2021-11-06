@@ -1,5 +1,7 @@
-﻿using System.Linq;
-using niscolas.UnityUtils.Core;
+﻿using System.Collections.Generic;
+using System.Linq;
+using niscolas.OdinCompositeAttributes;
+using niscolas.UnityExtensions;
 using Sirenix.OdinInspector;
 using UnityAtoms.BaseAtoms;
 using UnityAtoms.SceneMgmt;
@@ -20,9 +22,8 @@ namespace niscolas.UnityUtils.Extras
         [SerializeField]
         private SceneFieldReference[] _additiveScenes;
 
-        [AssetList]
-        [SerializeField]
-        private SceneTypeProfileSO _typeProfile;
+        [ExtractContent, SerializeField]
+        private SceneTypeProfileSOs _typeProfiles;
 
         [SerializeField]
         private AtomCollection _additionalData;
@@ -31,19 +32,20 @@ namespace niscolas.UnityUtils.Extras
         [SerializeField]
         private UnityEvent _loaded;
 
+
         public SceneField Scene => _scene.Value;
 
         public AtomCollection AdditionalData => _additionalData;
 
-        public SceneTypeProfileSO TypeProfile => _typeProfile;
+        public IEnumerable<SceneTypeProfileSO> TypeProfiles => _typeProfiles;
 
         public void Editor_Load()
         {
             SceneManagerUtility.LoadScene(Scene, LoadSceneMode.Single);
 
-            if (_typeProfile)
+            if (!_typeProfiles.IsNullOrEmpty())
             {
-                _typeProfile.Editor_Load();
+                _typeProfiles.Editor_Load();
             }
 
             LoadAdditiveScenes();
@@ -51,9 +53,9 @@ namespace niscolas.UnityUtils.Extras
 
         public void OnLoaded()
         {
-            if (_typeProfile)
+            if (!_typeProfiles.IsNullOrEmpty())
             {
-                _typeProfile.OnLoaded();
+                _typeProfiles.OnLoaded();
             }
 
             if (MasterLoader.ShouldLoadAdditiveScenes)

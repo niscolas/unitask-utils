@@ -8,8 +8,8 @@ namespace niscolas.UnityUtils.Extras
     public class MasterLoaderProfileSO : ScriptableObject
     {
         [SerializeField]
-        private SceneProfiles _sceneProfiles;
+        private SceneProfileSOs _sceneProfiles;
 
-        public SceneProfiles SceneProfiles => _sceneProfiles;
+        public SceneProfileSOs SceneProfiles => _sceneProfiles;
     }
 }

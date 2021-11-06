@@ -1,6 +1,6 @@
 ﻿using System.Linq;
-using niscolas.UnityUtils.Core;
 using Sirenix.OdinInspector;
+using UnityAtoms.BaseAtoms;
 using UnityAtoms.SceneMgmt;
 using UnityEngine;
 using UnityEngine.Events;
@@ -14,11 +14,29 @@ namespace niscolas.UnityUtils.Extras
     public class SceneTypeProfileSO : ScriptableObject
     {
         [SerializeField]
+        private StringReference _label;
+
+        [SerializeField]
         private SceneFieldReference[] _additiveScenes;
 
         [HideReferenceObjectPicker]
         [SerializeField]
         private UnityEvent _loaded;
+
+        public string Label
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_label.Value))
+                {
+                    return name;
+                }
+                else
+                {
+                    return _label.Value;
+                }
+            }
+        }
 
         public void Editor_Load()
         {

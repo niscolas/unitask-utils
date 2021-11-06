@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 namespace niscolas.UnityUtils.Extras
 {
     [Serializable]
-    public class SceneProfiles : IEnumerable<SceneProfileSO>
+    public class SceneProfileSOs : IEnumerable<SceneProfileSO>
     {
         [SerializeField]
         private List<SceneProfileSO> _content;
