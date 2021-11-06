@@ -24,7 +24,7 @@ namespace niscolas.UnityUtils.Extras
         protected override void Awake()
         {
             base.Awake();
-            MonoLifecycleHooksManager.TriggerOnMoment(_gameObject, CheckEnvironment, _conditionCheckMoment);
+            MonoLifecycleHooksManager.AutoTrigger(_gameObject, CheckEnvironment, _conditionCheckMoment);
         }
 
         protected virtual void CheckEnvironment()

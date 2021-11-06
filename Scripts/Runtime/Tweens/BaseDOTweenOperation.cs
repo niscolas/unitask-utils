@@ -102,7 +102,7 @@ namespace niscolas.UnityUtils.Extras
 
             if (_autoStart)
             {
-                MonoLifecycleHooksManager.TriggerOnMoment(_gameObject, DoTween, _autoStartMoment);
+                MonoLifecycleHooksManager.AutoTrigger(_gameObject, DoTween, _autoStartMoment);
             }
         }
 
