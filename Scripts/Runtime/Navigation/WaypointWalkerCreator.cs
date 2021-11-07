@@ -1,9 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using niscolas.UnityExtensions;
 using niscolas.UnityUtils.Extras;
 using Sirenix.OdinInspector;
+using UnityAtoms.BaseAtoms;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityUtils;
 
 namespace BestLostNFound
 {
@@ -12,9 +14,36 @@ namespace BestLostNFound
         [SerializeField]
         private List<Waypoint> _waypoints;
 
-        [Title("Debug")]
+        [SerializeField]
+        protected BoolReference _startFromFirstWaypoint = new BoolReference(false);
+
+        [SerializeField]
+        protected IntReference _playTimes;
+
+        [Title("Events")]
+        [SerializeField]
+        private UnityEvent<GameObject> _onBeforeCreated;
+
+        [SerializeField]
+        private UnityEvent<GameObject> _onAfterCreated;
+
+        [SerializeField]
+        private UnityEvent<GameObject> _onDestroyed;
+
+        [SerializeField]
+        private UnityEvent _onWaypointReached;
+
+        [SerializeField]
+        private UnityEvent _onLoopCompleted;
+
+        [SerializeField]
+        private UnityEvent _onCompleted;
+
+        [PropertyOrder(100), Title("Debug")]
         [ColorUsage(true, true), SerializeField]
         private Color _pathGizmosColor;
+
+        private static readonly IDespawnService DespawnService = new UnityDestroyService();
 
         protected abstract void Inner_CreateNew(
             GameObject target, Vector3 initialPosition, List<Waypoint> waypoints);
@@ -46,10 +75,14 @@ namespace BestLostNFound
                 }
             }
 
+            _onBeforeCreated?.Invoke(target);
+
             Inner_CreateNew(
                 target,
                 nearestInitialPosition,
                 ComputeWaypointWalkerWaypoints(nearestWaypointLineIndex));
+
+            _onAfterCreated?.Invoke(target);
         }
 
         public void Remove(GameObject target)
@@ -58,8 +91,9 @@ namespace BestLostNFound
             {
                 return;
             }
-            
-            Destroy(waypointWalker);
+
+            DespawnService.Despawn(waypointWalker);
+            _onDestroyed?.Invoke(target);
         }
 
         private List<Waypoint> ComputeWaypointWalkerWaypoints(int index)
@@ -92,6 +126,19 @@ namespace BestLostNFound
                     _waypoints[i].Position,
                     _waypoints[(i + 1) % waypointsCount].Position);
             }
+        }
+
+        protected WaypointWalkerStep GetDefaultStep()
+        {
+            return new WaypointWalkerStep
+            {
+                Waypoints = _waypoints,
+                PlayTimes = _playTimes.Value,
+                StartFromFirstWaypoint = _startFromFirstWaypoint.Value,
+                OnWaypointReached = _onWaypointReached,
+                OnLoopCompleted = _onLoopCompleted,
+                OnCompleted = _onCompleted
+            };
         }
     }
 }

@@ -1,8 +1,9 @@
 ﻿using niscolas.UnityUtils.Core;
+using niscolas.UnityUtils.UnityAtoms;
 using UnityAtoms;
 using UnityEngine;
 
-namespace niscolas.UnityUtils.UnityAtoms
+namespace niscolas.UnityUtils.Extras
 {
     [CreateAssetMenu(
         menuName = UnityAtomsConstants.ActionsCreateAssetMenuPrefix + "(string) => Log")]

@@ -7,7 +7,7 @@ using UnityEngine;
 namespace niscolas.UnityUtils.Extras
 {
     [Serializable]
-    public struct DOTweenRigidbodyMoveData : IWaypointWalkerData
+    public struct DOTweenRigidbodyMoveWaypointWalkerSettings : IWaypointWalkerData
     {
         [SerializeField]
         private BoolReference _isSpeedBased;

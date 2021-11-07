@@ -56,6 +56,24 @@ namespace niscolas.UnityUtils.Extras
             set => _playTimes = value;
         }
 
+        public UnityEvent OnWaypointReached
+        {
+            get => _onWaypointReached;
+            set => _onWaypointReached = value;
+        }
+
+        public UnityEvent OnLoopCompleted
+        {
+            get => _onLoopCompleted;
+            set => _onLoopCompleted = value;
+        }
+
+        public UnityEvent OnCompleted
+        {
+            get => _onCompleted;
+            set => _onCompleted = value;
+        }
+
         private bool IsEndless => _playTimes <= 0;
 
         private bool IsStepCompleted => _currentPlayTimes <= 0;
@@ -133,7 +151,7 @@ namespace niscolas.UnityUtils.Extras
             {
                 return;
             }
-            
+
             if (waypointIndex >= _waypoints.Count)
             {
                 FinishLoop(waypointWalker);

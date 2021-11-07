@@ -2,6 +2,7 @@
 using DG.Tweening;
 using niscolas.UnityUtils.Core;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace niscolas.UnityUtils.Extras
 {
@@ -11,12 +12,12 @@ namespace niscolas.UnityUtils.Extras
         private Rigidbody _rigidbody;
 
         [SerializeField]
-        private DOTweenRigidbodyMoveData _data;
+        private DOTweenRigidbodyMoveWaypointWalkerSettings _settings;
 
-        public DOTweenRigidbodyMoveData Data
+        public DOTweenRigidbodyMoveWaypointWalkerSettings Settings
         {
-            get => _data;
-            set => _data = value;
+            get => _settings;
+            set => _settings = value;
         }
 
         private Tween _runningTween;
@@ -41,9 +42,9 @@ namespace niscolas.UnityUtils.Extras
         public override UniTask WalkTo(Vector3 targetPosition)
         {
             _runningTween = _rigidbody
-                .DOMove(targetPosition, _data.ComputeRealDuration())
-                .SetSpeedBased(_data.IsSpeedBased)
-                .SetEase(_data.FollowEase)
+                .DOMove(targetPosition, _settings.ComputeRealDuration())
+                .SetSpeedBased(_settings.IsSpeedBased)
+                .SetEase(_settings.FollowEase)
                 .SetLink(_gameObject, LinkBehaviour.KillOnDisable);
 
             return _runningTween
