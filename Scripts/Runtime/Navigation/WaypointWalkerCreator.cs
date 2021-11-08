@@ -45,21 +45,42 @@ namespace BestLostNFound
 
         private static readonly IDespawnService DespawnService = new UnityDestroyService();
 
-        protected abstract void Inner_CreateNew(
+        protected abstract void Inner_Create(
             GameObject target, Vector3 initialPosition, List<Waypoint> waypoints);
 
-        public void CreateNew(GameObject target)
+        public void Create(GameObject target)
         {
-            int nearestWaypointLineIndex = default;
+            GetWaypointWalkerCreationData(
+                target,
+                out Vector3 nearestInitialPosition,
+                out int nearestWaypointIndex);
+
+            _onBeforeCreated?.Invoke(target);
+
+            Inner_Create(
+                target,
+                nearestInitialPosition,
+                ComputeWaypointWalkerWaypoints(nearestWaypointIndex));
+
+            _onAfterCreated?.Invoke(target);
+        }
+
+        private void GetWaypointWalkerCreationData(
+            GameObject target,
+            out Vector3 initialPosition,
+            out int nearestWaypointIndex)
+        {
+            nearestWaypointIndex = default;
             float nearestWaypointLineDistance = float.PositiveInfinity;
-            Vector3 nearestInitialPosition = default;
+            initialPosition = default;
 
             Vector3 targetPosition = target.transform.position;
 
             for (int i = 0; i < _waypoints.Count; i++)
             {
                 Vector3 currentWaypointPosition = _waypoints[i].Position;
-                Vector3 nextWaypointPosition = _waypoints[(i + 1) % _waypoints.Count].Position;
+                int nextWaypointIndex = (i + 1) % _waypoints.Count;
+                Vector3 nextWaypointPosition = _waypoints[nextWaypointIndex].Position;
 
                 Vector3 currentNearestLinePosition = targetPosition.NearestPositionOnLine(
                     currentWaypointPosition, nextWaypointPosition);
@@ -67,22 +88,15 @@ namespace BestLostNFound
                 float currentNearestLineDistance = Vector3.Distance(
                     targetPosition, currentNearestLinePosition);
 
-                if (currentNearestLineDistance < nearestWaypointLineDistance)
+                if (currentNearestLineDistance >= nearestWaypointLineDistance)
                 {
-                    nearestWaypointLineIndex = i;
-                    nearestWaypointLineDistance = currentNearestLineDistance;
-                    nearestInitialPosition = currentNearestLinePosition;
+                    continue;
                 }
+
+                nearestWaypointIndex = i;
+                nearestWaypointLineDistance = currentNearestLineDistance;
+                initialPosition = currentNearestLinePosition;
             }
-
-            _onBeforeCreated?.Invoke(target);
-
-            Inner_CreateNew(
-                target,
-                nearestInitialPosition,
-                ComputeWaypointWalkerWaypoints(nearestWaypointLineIndex));
-
-            _onAfterCreated?.Invoke(target);
         }
 
         public void Remove(GameObject target)
@@ -128,11 +142,11 @@ namespace BestLostNFound
             }
         }
 
-        protected WaypointWalkerStep GetDefaultStep()
+        protected WaypointWalkerStep GetDefaultStep(List<Waypoint> waypoints)
         {
             return new WaypointWalkerStep
             {
-                Waypoints = _waypoints,
+                Waypoints = waypoints,
                 PlayTimes = _playTimes.Value,
                 StartFromFirstWaypoint = _startFromFirstWaypoint.Value,
                 OnWaypointReached = _onWaypointReached,

@@ -8,6 +8,7 @@ namespace niscolas.UnityUtils.Extras
 {
     public class DOTweenSimpleRotation : BaseDOTweenTransformOperation<Quaternion, Vector3, QuaternionOptions>
     {
+        [FoldoutGroup("Tween Settings")]
         [SerializeField]
         private RotateMode _rotateMode = RotateMode.Fast;
 

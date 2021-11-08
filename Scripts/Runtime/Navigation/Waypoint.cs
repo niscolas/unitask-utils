@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace BestLostNFound
+namespace niscolas.UnityUtils.Extras
 {
     [Serializable]
     public struct Waypoint

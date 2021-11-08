@@ -7,7 +7,7 @@ using UnityEngine;
 namespace niscolas.UnityUtils.Extras
 {
     [Serializable]
-    public struct DOTweenRigidbodyMoveWaypointWalkerSettings : IWaypointWalkerData
+    public class DOTweenWaypointWalkerSettings : IWaypointWalkerData
     {
         [SerializeField]
         private BoolReference _isSpeedBased;
@@ -19,11 +19,16 @@ namespace niscolas.UnityUtils.Extras
         private FloatReference _speed;
 
         [SerializeField]
+        private LinkBehaviour _linkBehaviour = LinkBehaviour.KillOnDisable;
+
+        [SerializeField]
         private Ease _followEase;
 
         public bool IsSpeedBased => _isSpeedBased.Value;
 
         public Ease FollowEase => _followEase;
+
+        public LinkBehaviour LinkBehaviour => _linkBehaviour;
 
         public float ComputeRealDuration()
         {

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Cysharp.Threading.Tasks;
 using niscolas.UnityExtensions;
 using niscolas.UnityUtils.Core;
@@ -10,7 +11,7 @@ namespace niscolas.UnityUtils.Extras
     public class ColliderCallbacks : CachedMonoBehaviour
     {
         [SerializeField]
-        private Collider _collider;
+        private Collider[] _colliders;
 
         [Header("Events")]
         [SerializeField]
@@ -20,14 +21,18 @@ namespace niscolas.UnityUtils.Extras
 
         private void Start()
         {
-            _gameObject.IfUnityNullGetComponent(ref _collider);
+            if (_colliders.IsNullOrEmpty())
+            {
+                _colliders = _gameObject.GetComponents<Collider>();
+            }
+            
             WaitColliderDisable().Forget();
         }
 
         private async UniTaskVoid WaitColliderDisable()
         {
             await UniTask.WaitWhile(
-                () => _collider.enabled,
+                () => _colliders.Any(c => c.enabled),
                 cancellationToken: _gameObject.GetCancellationTokenOnDestroy());
 
             NotifyColliderDisabled();

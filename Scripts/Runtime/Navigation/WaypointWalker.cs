@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using niscolas.UnityUtils.Core;
 using Sirenix.OdinInspector;
@@ -27,7 +26,6 @@ namespace niscolas.UnityUtils.Extras
             get => _steps;
             set => _steps = value;
         }
-
 
         public GameObject GameObject => _gameObject;
 

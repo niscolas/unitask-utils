@@ -4,24 +4,24 @@ using niscolas.OdinCompositeAttributes;
 using niscolas.UnityExtensions;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.Serialization;
 
 namespace niscolas.UnityUtils.Extras
 {
-    public class DOTweenRigidbodyMoveWaypointWalkerCreator : WaypointWalkerCreator
+    public class DOTweenWaypointWalkerCreator<TWalker, TSettings> : WaypointWalkerCreator
+        where TWalker : DOTweenWaypointWalker<TSettings>
+        where TSettings : DOTweenWaypointWalkerSettings
     {
         [Title("Base Settings")]
-        [FormerlySerializedAs("_baseWaypointWalkerSettings"), FormerlySerializedAs("_baseData")]
         [ExtractContent, SerializeField]
-        private DOTweenRigidbodyMoveWaypointWalkerSettings _baseSettings;
+        private TSettings _baseSettings;
 
-        protected override void Inner_CreateNew(
+        protected override void Inner_Create(
             GameObject target, Vector3 initialPosition, List<Waypoint> waypoints)
         {
-            target.GetOrAddComponent(out DOTweenRigidbodyMoveWaypointWalker waypointWalker);
+            target.GetOrAddComponent(out TWalker waypointWalker);
 
-            waypointWalker.Steps = new List<WaypointWalkerStep> {GetDefaultStep()};
+            waypointWalker.Steps = new List<WaypointWalkerStep> {GetDefaultStep(waypoints)};
             waypointWalker.Settings = _baseSettings;
 
             target.GetOrAddComponent(out ColliderCallbacks colliderDisableCallbacks);
