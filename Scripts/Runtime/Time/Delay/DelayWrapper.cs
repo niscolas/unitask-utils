@@ -1,7 +1,8 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
+using niscolas.OdinCompositeAttributes;
+using niscolas.UnityUtils.Extras;
+using UnityAtoms.BaseAtoms;
 using UnityEngine;
 
 namespace UnityUtils
@@ -9,35 +10,17 @@ namespace UnityUtils
     [Serializable]
     public struct DelayWrapper
     {
-        [SerializeField]
-        private float _seconds;
+        [SecondsLabel, SerializeField]
+        private FloatReference _seconds;
 
         [SerializeField]
-        private int _frames;
+        private IntReference _frames;
 
-        public float Seconds
+        public UniTask Delay(GameObject gameObject = null)
         {
-            get => _seconds;
-            set => _seconds = value;
-        }
-
-        public int Frames
-        {
-            get => _frames;
-            set => _frames = value;
-        }
-
-        public IEnumerator Delay()
-        {
-            if (_seconds > 0)
-            {
-                yield return new WaitForSeconds(_seconds);
-            }
-
-            for (int i = 0; i < _frames; i++)
-            {
-                yield return null;
-            }
+            return UniTask.WhenAll(
+                Await.Seconds(_seconds.Value, gameObject),
+                Await.Frames(_frames.Value));
         }
     }
 }
