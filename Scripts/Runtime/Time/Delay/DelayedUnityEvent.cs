@@ -1,4 +1,5 @@
 ﻿using niscolas.OdinCompositeAttributes;
+using niscolas.UnityUtils.Core;
 using niscolas.UnityUtils.Extras;
 using UnityAtoms.BaseAtoms;
 using UnityEngine;
@@ -7,8 +8,11 @@ using UnityEngine.Serialization;
 
 namespace UnityUtils
 {
-    public class DelayedUnityEvent : MonoBehaviour
+    public class DelayedUnityEvent : CachedMonoBehaviour
     {
+        [SerializeField]
+        private MonoCallbackType _autoTriggerCallback = MonoCallbackType.None;
+        
         [FormerlySerializedAs("_delaySec"), SecondsLabel, SerializeField]
         private FloatReference _secondsDelay;
         
@@ -17,6 +21,12 @@ namespace UnityUtils
 
         [SerializeField]
         private UnityEvent _event;
+
+        protected override void Awake()
+        {
+            base.Awake();
+            MonoLifecycleHooksManager.AutoTrigger(_gameObject, Do, _autoTriggerCallback);
+        }
 
         public async void Do()
         {
