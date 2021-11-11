@@ -60,6 +60,10 @@ namespace niscolas.UnityUtils.Extras
         [SerializeField]
         private LoopType _loopType;
 
+        [FoldoutGroup("Tween Settings")]
+        [SerializeField]
+        private bool _canReplayWhileIncomplete;
+
         [FoldoutGroup("Events")]
         [SerializeField]
         private UnityEvent _onComplete;
@@ -106,8 +110,15 @@ namespace niscolas.UnityUtils.Extras
             }
         }
 
+        private bool _isPlaying;
+
         public void DoTween()
         {
+            if (_isPlaying && !_canReplayWhileIncomplete)
+            {
+                return;
+            }
+
             SetDefaultOptions(GetTweener());
         }
 
@@ -122,15 +133,22 @@ namespace niscolas.UnityUtils.Extras
                 .SetAutoKill(_autoKill)
                 .SetLoops(_loopCount.Value, _loopType)
                 .SetEase(_ease)
-                .OnComplete(() => _onComplete?.Invoke())
+                .OnStart(() =>
+                {
+                    _isPlaying = true;
+                    _onStart?.Invoke();
+                })
                 .OnKill(() => _onKill?.Invoke())
                 .OnPause(() => _onPause?.Invoke())
                 .OnPlay(() => _onPlay?.Invoke())
                 .OnRewind(() => _onRewind?.Invoke())
-                .OnStart(() => _onStart?.Invoke())
                 .OnUpdate(() => _onUpdate?.Invoke())
-                .OnStepComplete(() => _onStepComplete?.Invoke());
-
+                .OnStepComplete(() => _onStepComplete?.Invoke())
+                .OnComplete(() =>
+                {
+                    _onComplete?.Invoke();
+                    _isPlaying = false;
+                });
 
             AfterSetDefaultOptions(tweener);
         }
