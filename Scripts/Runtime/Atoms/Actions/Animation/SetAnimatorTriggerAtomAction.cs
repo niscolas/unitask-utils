@@ -6,7 +6,7 @@ namespace UnityAtomsUtils.Actions.SetAnimatorParam
 {
 	[CreateAssetMenu(
 		menuName = UnityAtomsConstants.ActionsCreateAssetMenuPrefix + "(Animator) => Set Trigger")]
-	public class SetAnimatorTrigger : BaseSetAnimatorParam<Void>
+	public class SetAnimatorTriggerAtomAction : BaseSetAnimatorParamAtomAction<Void>
 	{
 		public override void Do(Animator animator)
 		{
