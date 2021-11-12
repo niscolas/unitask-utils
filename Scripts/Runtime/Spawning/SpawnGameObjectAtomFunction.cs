@@ -7,8 +7,9 @@ using UnityEngine;
 
 namespace niscolas.UnityUtils.Extras
 {
-    [CreateAssetMenu(menuName = UnityAtomsConstants.ActionsCreateAssetMenuPrefix + "(GameObject) => Spawn : GameObject")]
-    public class SpawnGameObject : AtomFunction<GameObject, GameObject>
+    [CreateAssetMenu(
+        menuName = UnityAtomsConstants.FunctionsCreateAssetMenuPrefix + "(GameObject) => Spawn : GameObject")]
+    public class SpawnGameObjectAtomFunction : AtomFunction<GameObject, GameObject>
     {
         [SerializeField]
         private GameObjectReference _prefab;
@@ -89,7 +90,7 @@ namespace niscolas.UnityUtils.Extras
 
             if (_autoDespawn && _despawnStrategy)
             {
-                _despawnStrategy.Despawn(instance, _despawnDelay);
+                _despawnStrategy.Despawn(instance, _despawnDelay.Value);
             }
 
             return instance;
