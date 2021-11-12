@@ -4,7 +4,7 @@ using UnityEngine.Events;
 
 namespace niscolas.UnityUtils.Extras
 {
-    public class BaseDelayedMonoEvent : MonoBehaviour
+    public abstract class BaseDelayedMonoEvent : MonoBehaviour
     {
         [SerializeField]
         private FramesDelayData _framesDelay;
