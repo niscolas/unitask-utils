@@ -13,6 +13,9 @@ namespace niscolas.UnityUtils.Extras
         [SerializeField]
         private UnityEvent _onNoPaginationAllowed;
 
+        [SerializeField]
+        private UnityEvent _onPaginationTriggered;
+
         public void OnPaginationReallowed()
         {
             _onPaginationReallowed?.Invoke();
@@ -21,6 +24,11 @@ namespace niscolas.UnityUtils.Extras
         public void OnNoPaginationAllowed()
         {
             _onNoPaginationAllowed?.Invoke();
+        }
+
+        public void OnPaginationTriggered()
+        {
+            _onPaginationTriggered?.Invoke();
         }
     }
 }

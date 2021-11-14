@@ -43,6 +43,15 @@ namespace niscolas.UnityUtils.Extras
                 return;
             }
 
+            if (pageDelta < 0)
+            {
+                _leftPaginationTrigger.OnPaginationTriggered();
+            }
+            else
+            {
+                _rightPaginationTrigger.OnPaginationTriggered();
+            }
+
             CheckPaginationAllowance(targetPageIndex);
 
             _currentPageIndex.Value = targetPageIndex;
