@@ -19,7 +19,7 @@ namespace niscolas.UnityUtils.Extras
         private Vector3 _offset;
         private bool _isOffsetCached;
 
-        protected override void Do()
+        public override void Do()
         {
             Vector3 targetPosition = _target.position;
 

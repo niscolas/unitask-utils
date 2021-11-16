@@ -14,7 +14,7 @@ namespace niscolas.UnityUtils.Extras
         [SerializeField]
         private FloatReference _mass;
 
-        protected override void Do()
+        public override void Do()
         {
             _gameObject.IfUnityNullGetComponent(ref _rigidbody);
             

@@ -15,7 +15,7 @@ namespace niscolas.UnityUtils.Extras
         private GameObjectReference _prefab;
 
         [SerializeField]
-        private SpawnStrategy _strategy;
+        private BaseSpawnStrategySO _strategy;
 
         [Title("Despawn")]
         [SerializeField]
