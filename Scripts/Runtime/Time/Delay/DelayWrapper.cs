@@ -20,7 +20,7 @@ namespace UnityUtils
         {
             return UniTask.WhenAll(
                 Await.Seconds(_seconds.Value, gameObject),
-                Await.Frames(_frames.Value));
+                Await.Frames(_frames.Value, gameObject));
         }
     }
 }

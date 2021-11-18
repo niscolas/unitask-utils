@@ -34,7 +34,19 @@ namespace niscolas.UnityUtils.Extras
 
         [FoldoutGroup("Tween Settings")]
         [SerializeField]
+        protected FloatReference _delay;
+
+        [FoldoutGroup("Tween Settings")]
+        [SerializeField]
+        private bool _useEaseCurve;
+
+        [FoldoutGroup("Tween Settings")]
+        [DisableIf(nameof(_useEaseCurve)), SerializeField]
         private Ease _ease;
+
+        [FoldoutGroup("Tween Settings")]
+        [EnableIf(nameof(_useEaseCurve)), SerializeField]
+        private AnimationCurve _easeCurve;
 
         [FoldoutGroup("Tween Settings")]
         [SerializeField]
@@ -128,11 +140,11 @@ namespace niscolas.UnityUtils.Extras
         {
             tweener
                 .SetRelative(_toIsRelative)
+                .SetDelay(_delay.Value)
                 .SetUpdate(_updateType, _isIndependentUpdate)
                 .SetLink(GetLinkTarget(), _linkBehaviour)
                 .SetAutoKill(_autoKill)
                 .SetLoops(_loopCount.Value, _loopType)
-                .SetEase(_ease)
                 .OnStart(() =>
                 {
                     _isPlaying = true;
@@ -149,6 +161,15 @@ namespace niscolas.UnityUtils.Extras
                     _onComplete?.Invoke();
                     _isPlaying = false;
                 });
+
+            if (_useEaseCurve)
+            {
+                tweener.SetEase(_easeCurve);
+            }
+            else
+            {
+                tweener.SetEase(_ease);
+            }
 
             AfterSetDefaultOptions(tweener);
         }
