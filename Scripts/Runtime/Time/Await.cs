@@ -48,17 +48,18 @@ namespace niscolas.UnityUtils.Extras
             );
         }
 
-        public static UniTask Seconds(float seconds)
+        public static UniTask Seconds(float seconds, DelayType delayType = DelayType.DeltaTime)
         {
-            return Seconds(seconds, TaskHolderGameObject);
+            return Seconds(seconds, TaskHolderGameObject, delayType);
         }
 
-        public static UniTask Seconds(float seconds, GameObject gameObject)
+        public static UniTask Seconds(float seconds, GameObject gameObject, DelayType delayType = DelayType.DeltaTime)
         {
             return UniTask.Delay
             (
                 TimeSpan.FromSeconds(seconds),
-                cancellationToken: gameObject.GetCancellationTokenOnDestroy()
+                cancellationToken: gameObject.GetCancellationTokenOnDestroy(),
+                delayType: delayType
             );
         }
     }

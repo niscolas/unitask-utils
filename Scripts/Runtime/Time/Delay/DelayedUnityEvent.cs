@@ -1,4 +1,5 @@
-﻿using niscolas.OdinCompositeAttributes;
+﻿using Cysharp.Threading.Tasks;
+using niscolas.OdinCompositeAttributes;
 using niscolas.UnityUtils.Core;
 using niscolas.UnityUtils.Extras;
 using UnityAtoms.BaseAtoms;
@@ -20,6 +21,9 @@ namespace UnityUtils
         private IntReference _framesDelay;
 
         [SerializeField]
+        private DelayType _delayType = DelayType.DeltaTime;
+
+        [SerializeField]
         private UnityEvent _event;
 
         protected override void Awake()
@@ -31,7 +35,7 @@ namespace UnityUtils
         public async void Do()
         {
             await Await.Frames(_framesDelay.Value);
-            await Await.Seconds(_secondsDelay, gameObject);
+            await Await.Seconds(_secondsDelay, gameObject, _delayType);
             _event?.Invoke();
         }
     }
