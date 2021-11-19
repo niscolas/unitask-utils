@@ -8,7 +8,7 @@ using UnityEngine;
 namespace UnityUtils
 {
     [Serializable]
-    public struct DelayWrapper
+    public class DelayWrapper
     {
         [SecondsLabel, SerializeField]
         private FloatReference _seconds;
@@ -16,10 +16,13 @@ namespace UnityUtils
         [SerializeField]
         private IntReference _frames;
 
+        [SerializeField]
+        private DelayType _delayType = DelayType.DeltaTime;
+
         public UniTask Delay(GameObject gameObject = null)
         {
             return UniTask.WhenAll(
-                Await.Seconds(_seconds.Value, gameObject),
+                Await.Seconds(_seconds.Value, gameObject, _delayType),
                 Await.Frames(_frames.Value, gameObject));
         }
     }

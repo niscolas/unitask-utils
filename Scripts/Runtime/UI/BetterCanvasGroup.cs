@@ -1,11 +1,13 @@
 using DG.Tweening;
 using niscolas.UnityExtensions;
+using niscolas.UnityUtils.Core;
 using UnityAtoms.BaseAtoms;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace niscolas.UnityUtils.Extras
 {
-    public class BetterCanvasGroup : MonoBehaviour
+    public class BetterCanvasGroup : CachedMonoBehaviour
     {
         [SerializeField]
         private CanvasGroup _canvasGroup;
@@ -19,54 +21,41 @@ namespace niscolas.UnityUtils.Extras
         [SerializeField]
         private BoolReference _useIndependentUpdate;
 
-        private Tween _fadeInTween;
-        private Tween _fadeOutTween;
+        [Header("Events")]
+        [SerializeField]
+        private UnityEvent _onShown;
 
-        private void Start()
+        [SerializeField]
+        private UnityEvent _onHidden;
+
+        public void Show()
         {
-            if (!_canvasGroup)
-            {
-                Debug.LogWarning("no CanvasGroup, self destroying");
-                Destroy(this);
-                return;
-            }
-
-            CacheTweens();
-        }
-
-        private void CacheTweens()
-        {
-            _fadeInTween = _canvasGroup
+            _canvasGroup
                 .DOFade(1, _fadeDuration.Value)
                 .SetEase(_fadeEase)
                 .SetAutoKill(false)
                 .SetUpdate(_useIndependentUpdate.Value)
                 .OnComplete(
                     () =>
-                        _canvasGroup.SetInteractableAndBlocksRaycasts(true)
-                    )
-                .Pause();
+                    {
+                        _canvasGroup.SetInteractableAndBlocksRaycasts(true);
+                        _onShown?.Invoke();
+                    });
+        }
 
-            _fadeOutTween = _canvasGroup
+        public void Hide()
+        {
+            _canvasGroup
                 .DOFade(0, _fadeDuration.Value)
                 .SetEase(_fadeEase)
                 .SetAutoKill(false)
                 .SetUpdate(_useIndependentUpdate.Value)
                 .OnComplete(
                     () =>
-                        _canvasGroup.SetInteractableAndBlocksRaycasts(false)
-                    )
-                .Pause();
-        }
-
-        public void Show()
-        {
-            _fadeInTween.Restart();
-        }
-
-        public void Hide()
-        {
-            _fadeOutTween.Restart();
+                    {
+                        _canvasGroup.SetInteractableAndBlocksRaycasts(false);
+                        _onHidden?.Invoke();
+                    });
         }
     }
 }
