@@ -5,6 +5,7 @@ using niscolas.UnityUtils.Extras;
 using UnityAtoms.BaseAtoms;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
 namespace UnityUtils
@@ -13,10 +14,10 @@ namespace UnityUtils
     {
         [SerializeField]
         private MonoCallbackType _autoTriggerCallback = MonoCallbackType.None;
-        
+
         [FormerlySerializedAs("_delaySec"), SecondsLabel, SerializeField]
         private FloatReference _secondsDelay;
-        
+
         [SerializeField]
         private IntReference _framesDelay;
 
@@ -34,7 +35,11 @@ namespace UnityUtils
 
         public async void Do()
         {
-            await Await.Frames(_framesDelay.Value);
+            if (_delayType == DelayType.DeltaTime)
+            {
+                await Await.Frames(_framesDelay.Value);
+            }
+
             await Await.Seconds(_secondsDelay, gameObject, _delayType);
             _event?.Invoke();
         }
