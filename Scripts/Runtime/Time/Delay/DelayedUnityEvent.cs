@@ -35,10 +35,7 @@ namespace UnityUtils
 
         public async void Do()
         {
-            if (_delayType == DelayType.DeltaTime)
-            {
-                await Await.Frames(_framesDelay.Value);
-            }
+            await Await.Frames(_framesDelay.Value);
 
             await Await.Seconds(_secondsDelay, gameObject, _delayType);
             _event?.Invoke();
