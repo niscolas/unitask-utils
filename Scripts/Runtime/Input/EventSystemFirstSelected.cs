@@ -31,6 +31,12 @@ namespace niscolas.UnityUtils.UnityAtoms
             if (!_firstPlayerInput)
             {
                 _firstPlayerInput = PlayerInput.GetPlayerByIndex(0);
+                
+                if (!_firstPlayerInput)
+                {
+                    return;
+                }
+                
                 _firstPlayerInput.onControlsChanged += PlayerInput_OnControlsChanged;
             }
         }

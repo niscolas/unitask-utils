@@ -124,6 +124,7 @@ namespace niscolas.UnityUtils.Extras
 
         private bool _isPlaying;
 
+        [Button]
         public void DoTween()
         {
             if (_isPlaying && !_canReplayWhileIncomplete)
