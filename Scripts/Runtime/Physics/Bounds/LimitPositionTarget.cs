@@ -1,4 +1,5 @@
-﻿using Plugins.UnityAtomsUtils.Scripts.MonoBehaviourHelpers;
+﻿using niscolas.UnityUtils.UnityAtoms;
+using Plugins.UnityAtomsUtils.Scripts.MonoBehaviourHelpers;
 using UnityEngine;
 
 namespace UnityAtomsUtils.MonoBehaviourHelpers.TransformUtils

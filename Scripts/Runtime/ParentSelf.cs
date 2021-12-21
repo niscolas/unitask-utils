@@ -1,4 +1,5 @@
 ﻿using niscolas.UnityUtils.Core;
+using niscolas.UnityUtils.UnityAtoms;
 using Plugins.UnityAtomsUtils.Scripts.MonoBehaviourHelpers;
 using UnityEngine;
 using UnityEngine.Events;

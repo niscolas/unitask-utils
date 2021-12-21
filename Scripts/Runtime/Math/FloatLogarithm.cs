@@ -1,5 +1,4 @@
-﻿using niscolas.UnityAtomsUtils;
-using UnityAtoms.BaseAtoms;
+﻿using UnityAtoms.BaseAtoms;
 using UnityAtomsUtils;
 using UnityEngine;
 using UnityEngine.Serialization;

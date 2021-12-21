@@ -1,4 +1,4 @@
-﻿using UnityAtoms.MonoHooks;
+﻿using UnityAtoms.BaseAtoms;
 using UnityEngine;
 
 namespace niscolas.UnityUtils.UnityAtoms
