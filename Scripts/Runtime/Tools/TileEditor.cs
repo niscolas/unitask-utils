@@ -1,177 +1,182 @@
 ﻿#if UNITY_EDITOR
-using niscolas.UnityExtensions;
+using niscolas.UnityUtils.Core;
+using niscolas.UnityUtils.Core.Extensions;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Serialization;
-using UnityUtils;
 
-namespace RoadModule
+namespace niscolas.UnityUtils.Extras
 {
-	public class TileEditor : MonoBehaviour
-	{
-		[OnValueChanged(nameof(UpdateEditorMesh))]
-		[SerializeField]
-		private GameObject[] _baseTiles;
+    public class TileEditor : MonoBehaviour
+    {
+        public enum MultiTileSpawnType
+        {
+            Alternate,
+            Randomize
+        }
 
-		[ShowIf("@" + nameof(_baseTiles) + ".Length > 1")]
-		[SerializeField]
-		private MultiTileSpawnType _multiTileSpawnType;
+        private static readonly ISpawnService SpawnService = new UnityInstantiateService();
 
-		[OnValueChanged(nameof(UpdateEditorMesh))]
-		[FormerlySerializedAs("_size"), SerializeField]
-		private Vector3Int _quantity;
+        [OnValueChanged(nameof(UpdateEditorMesh))]
+        [SerializeField]
+        private GameObject[] _baseTiles;
 
-		[OnValueChanged(nameof(UpdateEditorTilesPositions))]
-		[FormerlySerializedAs("_tileSize"), SerializeField]
-		private Vector3 _offset;
+        [ShowIf("@" + nameof(_baseTiles) + ".Length > 1")]
+        [SerializeField]
+        private MultiTileSpawnType _multiTileSpawnType;
 
-		[Header("Debug")]
-		[ReadOnly]
-		[SerializeField]
-		private GameObject[] _existingTiles;
+        [OnValueChanged(nameof(UpdateEditorMesh))]
+        [FormerlySerializedAs("_size")]
+        [SerializeField]
+        private Vector3Int _quantity;
 
-		private static readonly ISpawnService SpawnService = new UnityInstantiateService();
+        [OnValueChanged(nameof(UpdateEditorTilesPositions))]
+        [FormerlySerializedAs("_tileSize")]
+        [SerializeField]
+        private Vector3 _offset;
 
-		[ContextMenu(nameof(UpdateEditorMesh))]
-		[Button]
-		private void UpdateEditorMesh()
-		{
-			Clear();
+        [Header("Debug")]
+        [ReadOnly]
+        [SerializeField]
+        private GameObject[] _existingTiles;
 
-			_existingTiles = CreateTiles(
-				_baseTiles,
-				_multiTileSpawnType,
-				_quantity,
-				_offset,
-				transform);
-		}
+        [ContextMenu(nameof(UpdateEditorMesh))]
+        [Button]
+        private void UpdateEditorMesh()
+        {
+            Clear();
 
-		[Button]
-		private void UpdateEditorTilesPositions()
-		{
-			UpdateTilesPositions(_existingTiles, _quantity, _offset);
-		}
+            _existingTiles = CreateTiles(
+                _baseTiles,
+                _multiTileSpawnType,
+                _quantity,
+                _offset,
+                transform);
+        }
 
-		public static GameObject[] CreateTiles(
-			GameObject baseTile,
-			Vector3Int quantity,
-			Vector3 offset,
-			Transform parent = null)
-		{
-			return CreateTiles(new[] {baseTile}, default, quantity, offset, parent);
-		}
+        [Button]
+        private void UpdateEditorTilesPositions()
+        {
+            UpdateTilesPositions(_existingTiles, _quantity, _offset);
+        }
 
-		public static GameObject[] CreateTiles(
-			GameObject[] baseTiles,
-			MultiTileSpawnType multiTileSpawnType,
-			Vector3Int quantity,
-			Vector3 offset,
-			Transform parent = null)
-		{
-			if (baseTiles.IsNullOrEmpty()) return default;
+        public static GameObject[] CreateTiles(
+            GameObject baseTile,
+            Vector3Int quantity,
+            Vector3 offset,
+            Transform parent = null)
+        {
+            return CreateTiles(new[] {baseTile}, default, quantity, offset, parent);
+        }
 
-			GameObject[] tiles = new GameObject[quantity.x * quantity.y * quantity.z];
+        public static GameObject[] CreateTiles(
+            GameObject[] baseTiles,
+            MultiTileSpawnType multiTileSpawnType,
+            Vector3Int quantity,
+            Vector3 offset,
+            Transform parent = null)
+        {
+            if (baseTiles.IsNullOrEmpty())
+            {
+                return default;
+            }
 
-			Vector3 gridOffset = ComputeGridOffset(quantity, offset);
+            GameObject[] tiles = new GameObject[quantity.x * quantity.y * quantity.z];
 
-			int counter = 0;
-			for (int i = 0; i < quantity.x; i++)
-			{
-				for (int j = 0; j < quantity.y; j++)
-				{
-					for (int k = 0; k < quantity.z; k++)
-					{
-						GameObject baseTile = ChooseTile(baseTiles, multiTileSpawnType);
-						GameObject tileInstance = CreateTile(baseTile, offset, parent, i, j, k, gridOffset);
+            Vector3 gridOffset = ComputeGridOffset(quantity, offset);
 
-						tiles[counter] = tileInstance;
-						counter++;
-					}
-				}
-			}
+            int counter = 0;
+            for (int i = 0; i < quantity.x; i++)
+            {
+                for (int j = 0; j < quantity.y; j++)
+                {
+                    for (int k = 0; k < quantity.z; k++)
+                    {
+                        GameObject baseTile = ChooseTile(baseTiles, multiTileSpawnType);
+                        GameObject tileInstance = CreateTile(baseTile, offset, parent, i, j, k, gridOffset);
 
-			return tiles;
-		}
+                        tiles[counter] = tileInstance;
+                        counter++;
+                    }
+                }
+            }
 
-		private static GameObject ChooseTile(GameObject[] baseTiles, MultiTileSpawnType multiTileSpawnType)
-		{
-			return baseTiles[0];
-		}
+            return tiles;
+        }
 
-		private static GameObject CreateTile(
-			GameObject tile,
-			Vector3 offset,
-			Transform parent,
-			int i,
-			int j,
-			int k,
-			Vector3 gridOffset)
-		{
-			Vector3 position = ComputeTilePosition(i, j, k, offset, gridOffset);
-			GameObject tileInstance = SpawnService.Spawn(tile, parent);
-			tileInstance.transform.localPosition = position;
+        private static GameObject ChooseTile(GameObject[] baseTiles, MultiTileSpawnType multiTileSpawnType)
+        {
+            return baseTiles[0];
+        }
 
-			// if (tile.IsPartOfPrefab())
-			// {
-			// 	tileInstance = PrefabUtility.InstantiatePrefab(tile, parent) as GameObject;
-			//
-			// 	tileInstance.transform.position = position;
-			// }
-			// else
-			// {
-			// 	tileInstance = Instantiate(tile, position, tile.transform.rotation, parent);
-			// }
+        private static GameObject CreateTile(
+            GameObject tile,
+            Vector3 offset,
+            Transform parent,
+            int i,
+            int j,
+            int k,
+            Vector3 gridOffset)
+        {
+            Vector3 position = ComputeTilePosition(i, j, k, offset, gridOffset);
+            GameObject tileInstance = SpawnService.Spawn(tile, parent);
+            tileInstance.transform.localPosition = position;
 
-			return tileInstance;
-		}
+            // if (tile.IsPartOfPrefab())
+            // {
+            // 	tileInstance = PrefabUtility.InstantiatePrefab(tile, parent) as GameObject;
+            //
+            // 	tileInstance.transform.position = position;
+            // }
+            // else
+            // {
+            // 	tileInstance = Instantiate(tile, position, tile.transform.rotation, parent);
+            // }
 
-		public static Vector3 ComputeGridOffset(Vector3Int quantity, Vector3 offset)
-		{
-			Vector3 result = -(offset.Multiply(quantity - Vector3Int.one) * 0.5f);
-			return result;
-		}
+            return tileInstance;
+        }
 
-		public static void UpdateTilesPositions(GameObject[] tiles, Vector3Int quantity, Vector3 offset)
-		{
-			Vector3 gridOffset = ComputeGridOffset(quantity, offset);
+        public static Vector3 ComputeGridOffset(Vector3Int quantity, Vector3 offset)
+        {
+            Vector3 result = -(offset.Multiply(quantity - Vector3Int.one) * 0.5f);
+            return result;
+        }
 
-			int counter = 0;
-			for (int i = 0; i < quantity.x; i++)
-			{
-				for (int j = 0; j < quantity.y; j++)
-				{
-					for (int k = 0; k < quantity.z; k++)
-					{
-						tiles[counter].transform.localPosition = ComputeTilePosition(i, j, k, offset, gridOffset);
-						counter++;
-					}
-				}
-			}
-		}
+        public static void UpdateTilesPositions(GameObject[] tiles, Vector3Int quantity, Vector3 offset)
+        {
+            Vector3 gridOffset = ComputeGridOffset(quantity, offset);
 
-		public static Vector3 ComputeTilePosition(int i, int j, int k, Vector3 offset, Vector3 gridOffset)
-		{
-			Vector3 position = new Vector3
-			{
-				x = offset.x * i + gridOffset.x,
-				y = offset.y * j + gridOffset.y,
-				z = offset.z * k + gridOffset.z
-			};
+            int counter = 0;
+            for (int i = 0; i < quantity.x; i++)
+            {
+                for (int j = 0; j < quantity.y; j++)
+                {
+                    for (int k = 0; k < quantity.z; k++)
+                    {
+                        tiles[counter].transform.localPosition = ComputeTilePosition(i, j, k, offset, gridOffset);
+                        counter++;
+                    }
+                }
+            }
+        }
 
-			return position;
-		}
+        public static Vector3 ComputeTilePosition(int i, int j, int k, Vector3 offset, Vector3 gridOffset)
+        {
+            Vector3 position = new()
+            {
+                x = offset.x * i + gridOffset.x,
+                y = offset.y * j + gridOffset.y,
+                z = offset.z * k + gridOffset.z
+            };
 
-		[Button]
-		private void Clear()
-		{
-			transform.DestroyChildren();
-		}
+            return position;
+        }
 
-		public enum MultiTileSpawnType
-		{
-			Alternate,
-			Randomize
-		}
-	}
+        [Button]
+        private void Clear()
+        {
+            transform.DestroyChildren();
+        }
+    }
 }
 #endif

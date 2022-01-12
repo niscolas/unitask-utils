@@ -1,25 +1,20 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
-using DefaultNamespace;
+using niscolas.UnityUtils.Core;
 
 namespace niscolas.UnityUtils.Extras
 {
     public class AdvancedButtonController
     {
-        public event Action OnTap;
-        public event Action OnDoubleTap;
-        public event Action OnHoldStarted;
-        public event Action OnHoldEnded;
-
         private readonly IAdvancedButton _advancedButton;
         private readonly float _maxDoubleTapInterval;
         private readonly float _maxTapTime;
         private readonly float _minHoldTime;
+        private bool _isHoldAllowed;
 
         private bool _isHolding;
-        private bool _isHoldAllowed;
-        private float _pointerDownTime;
         private float _lastTapTime;
+        private float _pointerDownTime;
 
         public AdvancedButtonController(
             IAdvancedButton advancedButton, float minHoldTime, float maxTapTime, float maxDoubleTapInterval)
@@ -29,6 +24,11 @@ namespace niscolas.UnityUtils.Extras
             _maxTapTime = maxTapTime;
             _maxDoubleTapInterval = maxDoubleTapInterval;
         }
+
+        public event Action OnTap;
+        public event Action OnDoubleTap;
+        public event Action OnHoldStarted;
+        public event Action OnHoldEnded;
 
         public void OnPointerDown()
         {

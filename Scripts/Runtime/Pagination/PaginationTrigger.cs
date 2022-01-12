@@ -4,12 +4,13 @@ using UnityEngine.Events;
 
 namespace niscolas.UnityUtils.Extras
 {
+    [AddComponentMenu(Constants.AddComponentMenuPrefix + "Pagination Trigger")]
     public class PaginationTrigger : CachedMonoBehaviour
     {
-        [Header("Events")]
+        [Header(HeaderTitles.Events)]
         [SerializeField]
         private UnityEvent _onPaginationReallowed;
-        
+
         [SerializeField]
         private UnityEvent _onNoPaginationAllowed;
 

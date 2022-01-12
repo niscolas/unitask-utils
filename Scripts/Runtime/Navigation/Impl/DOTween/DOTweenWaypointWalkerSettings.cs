@@ -12,10 +12,12 @@ namespace niscolas.UnityUtils.Extras
         [SerializeField]
         private BoolReference _isSpeedBased;
 
-        [HideIf(nameof(IsSpeedBased)), SerializeField]
+        [HideIf(nameof(IsSpeedBased))]
+        [SerializeField]
         private FloatReference _duration;
 
-        [ShowIf(nameof(IsSpeedBased)), SerializeField]
+        [ShowIf(nameof(IsSpeedBased))]
+        [SerializeField]
         private FloatReference _speed;
 
         [SerializeField]

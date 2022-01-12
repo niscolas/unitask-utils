@@ -1,6 +1,6 @@
 using DG.Tweening;
-using niscolas.UnityExtensions;
 using niscolas.UnityUtils.Core;
+using niscolas.UnityUtils.Core.Extensions;
 using UnityAtoms.BaseAtoms;
 using UnityEngine;
 using UnityEngine.Events;

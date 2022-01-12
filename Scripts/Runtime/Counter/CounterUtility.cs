@@ -1,9 +1,9 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
-using niscolas.UnityExtensions;
+using niscolas.UnityUtils.Core;
+using niscolas.UnityUtils.Core.Extensions;
 using TMPro;
 using UnityEngine;
-using UnityUtils;
 
 namespace niscolas.UnityUtils.Extras
 {

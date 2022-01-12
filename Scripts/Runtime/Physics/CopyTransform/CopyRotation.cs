@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 
-namespace UnityAtomsUtils.MonoBehaviourHelpers.TransformUtils
+namespace niscolas.UnityUtils.Extras
 {
-	public class CopyRotation : BaseCopyTransform
-	{
-		protected override void CopyTransform(Transform copyTarget)
-		{
-			transform.rotation = copyTarget.rotation;
-		}
-	}
+    public class CopyRotation : BaseCopyTransform
+    {
+        protected override void CopyTransform(Transform copyTarget)
+        {
+            transform.rotation = copyTarget.rotation;
+        }
+    }
 }

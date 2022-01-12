@@ -10,6 +10,7 @@ namespace niscolas.UnityUtils.Extras
         private Transform _point;
 
         public bool IsValid => _point;
+
         public Vector3 Position => _point.position;
     }
 }

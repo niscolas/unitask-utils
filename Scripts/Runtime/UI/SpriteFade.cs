@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using DG.Tweening;
 using UnityAtoms.BaseAtoms;
 using UnityEngine;
@@ -24,14 +23,15 @@ namespace niscolas.UnityUtils.Extras
         [SerializeField]
         private Ease _fadeOutEase;
 
-        private IEnumerable<SpriteRenderer> _spriteRenderers;
         private IEnumerable<Graphic> _graphics;
+
+        private IEnumerable<SpriteRenderer> _spriteRenderers;
 
         private void Start()
         {
             _spriteRenderers = GetComponentsInChildren<SpriteRenderer>(true);
             _graphics = GetComponentsInChildren<Graphic>(true);
-            
+
             gameObject.SetActive(false);
         }
 

@@ -1,8 +1,7 @@
 ﻿using niscolas.UnityUtils.UnityAtoms;
-using Plugins.UnityAtomsUtils.Scripts.MonoBehaviourHelpers;
 using UnityEngine;
 
-namespace UnityAtomsUtils.MonoBehaviourHelpers.TransformUtils
+namespace niscolas.UnityUtils.Extras
 {
     public class LimitPositionTarget : MonoBehaviour
     {
@@ -50,7 +49,10 @@ namespace UnityAtomsUtils.MonoBehaviourHelpers.TransformUtils
 
         private void SubscribeToLimiter()
         {
-            if (!_limiter.Value) return;
+            if (!_limiter.Value)
+            {
+                return;
+            }
 
             _limiter.Value.AddTarget(this);
         }

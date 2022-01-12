@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using BestLostNFound;
 using Cysharp.Threading.Tasks;
-using DG.Tweening;
-using niscolas.UnityExtensions;
-using UnityAtoms.BaseAtoms;
+using niscolas.UnityUtils.Core;
+using niscolas.UnityUtils.Core.Extensions;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -15,16 +12,15 @@ namespace niscolas.UnityUtils.Extras
     public class WaypointWalkerStep
     {
         [SerializeField]
-        private List<Waypoint> _waypoints = new List<Waypoint>();
+        private List<Waypoint> _waypoints = new();
 
-        [Header("Settings")]
         [SerializeField]
         private bool _startFromFirstWaypoint = true;
 
         [SerializeField]
         private int _playTimes;
 
-        [Header("Events")]
+        [Header(HeaderTitles.Events)]
         [SerializeField]
         private UnityEvent _onWaypointReached;
 
@@ -34,9 +30,9 @@ namespace niscolas.UnityUtils.Extras
         [SerializeField]
         private UnityEvent _onCompleted;
 
-        public event Action WaypointReached;
-        public event Action LoopCompleted;
-        public event Action Completed;
+        private int _currentPlayTimes;
+
+        private bool _isCancelled;
 
         public List<Waypoint> Waypoints
         {
@@ -78,8 +74,9 @@ namespace niscolas.UnityUtils.Extras
 
         private bool IsStepCompleted => _currentPlayTimes <= 0;
 
-        private bool _isCancelled;
-        private int _currentPlayTimes;
+        public event Action WaypointReached;
+        public event Action LoopCompleted;
+        public event Action Completed;
 
         public void Begin(IWaypointWalker waypointWalker)
         {

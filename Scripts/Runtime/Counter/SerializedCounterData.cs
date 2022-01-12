@@ -1,5 +1,6 @@
 ﻿using System;
 using niscolas.OdinCompositeAttributes;
+using niscolas.UnityUtils.Core;
 using UnityAtoms.BaseAtoms;
 using UnityEngine;
 using UnityEngine.Events;
@@ -10,21 +11,23 @@ namespace niscolas.UnityUtils.Extras
     public class SerializedCounterData
     {
         [SerializeField]
-        private IntReference _from = new IntReference();
+        private IntReference _from = new();
 
         [SerializeField]
-        private IntReference _to = new IntReference();
+        private IntReference _to = new();
 
-        [SecondsLabel, SerializeField]
-        private FloatReference _firstTickTimeInterval = new FloatReference();
+        [SecondsLabel]
+        [SerializeField]
+        private FloatReference _firstTickTimeInterval = new();
 
-        [SecondsLabel, SerializeField]
-        private FloatReference _timeInterval = new FloatReference();
+        [SecondsLabel]
+        [SerializeField]
+        private FloatReference _timeInterval = new();
 
-        [Header("Events")]
+        [Header(HeaderTitles.Events)]
         [SerializeField]
         private UnityEvent<int> _onTick;
-        
+
         [SerializeField]
         private UnityEvent _onFinished;
 

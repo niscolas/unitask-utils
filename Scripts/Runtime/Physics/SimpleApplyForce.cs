@@ -8,12 +8,13 @@ namespace niscolas.UnityUtils.Extras
     public class SimpleApplyForce : CachedMonoBehaviour
     {
         [SerializeField]
-        private FloatReference _force = new FloatReference(1);
+        private FloatReference _force = new(1);
 
         [SerializeField]
         private ForceMode _forceMode;
-        
-        [Required, SerializeField]
+
+        [Required]
+        [SerializeField]
         private Transform _forceDirectionReference;
 
         public void Do(GameObject target)
@@ -22,7 +23,7 @@ namespace niscolas.UnityUtils.Extras
             {
                 return;
             }
-            
+
             targetRigidbody.AddForce(_force.Value * _forceDirectionReference.forward, _forceMode);
         }
     }

@@ -2,32 +2,32 @@
 using UnityAtoms.BaseAtoms;
 using UnityEngine;
 
-namespace UnityAtomsUtils.MonoBehaviourHelpers
+namespace niscolas.UnityUtils.Extras
 {
-	public class RichTextUpdater : MonoBehaviour
-	{
-		[SerializeField]
-		private TMP_Text textComponent;
+    public class RichTextUpdater : MonoBehaviour
+    {
+        [SerializeField]
+        private TMP_Text textComponent;
 
-		[Header("References")]
-		[SerializeField]
-		private StringReference baseTextBeforeDynamicValue;
+        [Header("References")]
+        [SerializeField]
+        private StringReference baseTextBeforeDynamicValue;
 
-		[SerializeField]
-		private StringReference baseTextAfterDynamicValue;
+        [SerializeField]
+        private StringReference baseTextAfterDynamicValue;
 
-		private void Awake()
-		{
-			if (!textComponent)
-			{
-				textComponent = GetComponentInChildren<TMP_Text>();
-			}
-		}
+        private void Awake()
+        {
+            if (!textComponent)
+            {
+                textComponent = GetComponentInChildren<TMP_Text>();
+            }
+        }
 
-		public void UpdateText(string newText)
-		{
-			string text = baseTextBeforeDynamicValue + newText + baseTextAfterDynamicValue;
-			textComponent.SetText(text);
-		}
-	}
+        public void UpdateText(string newText)
+        {
+            string text = baseTextBeforeDynamicValue + newText + baseTextAfterDynamicValue;
+            textComponent.SetText(text);
+        }
+    }
 }

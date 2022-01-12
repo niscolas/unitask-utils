@@ -1,6 +1,4 @@
-﻿using DefaultNamespace;
-using niscolas.UnityUtils.Extras;
-using UnityAtoms.BaseAtoms;
+﻿using UnityAtoms.BaseAtoms;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -15,13 +13,13 @@ namespace niscolas.UnityUtils.Extras
         IAdvancedButton
     {
         [SerializeField]
-        private FloatReference _maxTapTime = new FloatReference(0.5f);
+        private FloatReference _maxTapTime = new(0.5f);
 
         [SerializeField]
-        private FloatReference _maxDoubleTapInterval = new FloatReference(0.5f);
+        private FloatReference _maxDoubleTapInterval = new(0.5f);
 
         [SerializeField]
-        private FloatReference _minHoldTime = new FloatReference(0.6f);
+        private FloatReference _minHoldTime = new(0.6f);
 
         [Header("Events")]
         [SerializeField]
@@ -36,13 +34,12 @@ namespace niscolas.UnityUtils.Extras
         [SerializeField]
         private UnityEvent _doubleClickEvent;
 
-        [FormerlySerializedAs("_holdEvent"), SerializeField]
+        [FormerlySerializedAs("_holdEvent")]
+        [SerializeField]
         private UnityEvent _holdStartEvent;
 
         [SerializeField]
         private UnityEvent _holdEndedEvent;
-
-        public float Time => UnityEngine.Time.time;
 
         private AdvancedButtonController _controller;
 
@@ -58,6 +55,8 @@ namespace niscolas.UnityUtils.Extras
             _controller.OnHoldStarted += NotifyHoldStarted;
             _controller.OnHoldEnded += NotifyHoldEnded;
         }
+
+        public float Time => UnityEngine.Time.time;
 
         public void OnPointerClick(PointerEventData eventData)
         {

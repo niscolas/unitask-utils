@@ -1,24 +1,27 @@
-﻿using niscolas.UnityExtensions;
-using niscolas.UnityUtils.Core;
+﻿using niscolas.UnityUtils.Core;
+using niscolas.UnityUtils.Core.Extensions;
 using Sirenix.OdinInspector;
 using UnityAtoms.BaseAtoms;
 using UnityEngine;
+using UnityEngine.Animations;
 using UnityEngine.Serialization;
 
 namespace niscolas.UnityUtils.Extras
 {
     public class ScaleSlider : CachedMonoBehaviour
     {
-        [FormerlySerializedAs("_fillTransform"), SerializeField]
+        [FormerlySerializedAs("_fillTransform")]
+        [SerializeField]
         private Transform _fill;
 
         [SerializeField]
-        private FloatReference _minScale = new FloatReference(0);
+        private FloatReference _minScale = new(0);
 
         [SerializeField]
-        private FloatReference _maxScale = new FloatReference(1f);
+        private FloatReference _maxScale = new(1f);
 
-        [EnumToggleButtons, SerializeField]
+        [EnumToggleButtons]
+        [SerializeField]
         private Axis _affectedAxes;
 
         private Transform Fill
@@ -41,17 +44,17 @@ namespace niscolas.UnityUtils.Extras
             float fill = (_maxScale.Value - _minScale.Value) * ratio + _minScale.Value;
 
             Vector3 localScale = Fill.localScale;
-            if (_affectedAxes.BitmaskEnumContainsValue(Axis.X))
+            if (_affectedAxes.HasFlag(Axis.X))
             {
                 localScale.x = fill;
             }
 
-            if (_affectedAxes.BitmaskEnumContainsValue(Axis.Y))
+            if (_affectedAxes.HasFlag(Axis.Y))
             {
                 localScale.y = fill;
             }
 
-            if (_affectedAxes.BitmaskEnumContainsValue(Axis.Z))
+            if (_affectedAxes.HasFlag(Axis.Z))
             {
                 localScale.z = fill;
             }
