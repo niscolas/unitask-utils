@@ -24,7 +24,7 @@ namespace niscolas.UnityUtils.Extras
             waypointWalker.Steps = new List<WaypointWalkerStep> {GetDefaultStep(waypoints)};
             waypointWalker.Settings = _baseSettings;
 
-            target.GetOrAddComponent(out ColliderCallbacks colliderDisableCallbacks);
+            target.GetOrAddComponent(out ColliderCallbacksMB colliderDisableCallbacks);
 
             void OnColliderDisabled()
             {

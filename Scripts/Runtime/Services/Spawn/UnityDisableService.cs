@@ -1,4 +1,5 @@
-﻿using niscolas.UnityUtils.Core;
+﻿using niscolas.UnityUtils.Async;
+using niscolas.UnityUtils.Core;
 using UnityEngine;
 
 namespace niscolas.UnityUtils.Extras
