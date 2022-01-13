@@ -7,7 +7,7 @@ using UnityEngine.Events;
 
 namespace niscolas.UnityUtils.Extras
 {
-    public abstract class WaypointWalkerMonoBehaviour : CachedMonoBehaviour, IWaypointWalker
+    public abstract class WaypointWalkerMB : CachedMB, IWaypointWalker
     {
         [ListDrawerSettings(NumberOfItemsPerPage = 1)]
         [SerializeField]

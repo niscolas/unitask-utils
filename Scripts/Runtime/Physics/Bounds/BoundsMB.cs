@@ -5,7 +5,7 @@ using UnityEngine;
 namespace niscolas.UnityUtils.Extras
 {
     [AddComponentMenu(Constants.AddComponentMenuPrefix + "Bounds")]
-    public class BoundsMB : CachedMonoBehaviour
+    public class BoundsMB : CachedMB
     {
         [SerializeField]
         private Transform _center;

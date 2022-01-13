@@ -5,7 +5,7 @@ using UnityEngine;
 namespace niscolas.UnityUtils.Extras
 {
     [AddComponentMenu(Constants.AddComponentMenuPrefix + "Limit Position Target")]
-    public class LimitPositionTargetMB : CachedMonoBehaviour
+    public class LimitPositionTargetMB : CachedMB
     {
         [SerializeField]
         private Transform _targetTransform;

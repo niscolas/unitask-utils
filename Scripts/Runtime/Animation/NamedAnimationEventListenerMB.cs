@@ -6,7 +6,7 @@ using UnityEngine.Events;
 namespace niscolas.UnityUtils.Extras
 {
     [AddComponentMenu(Constants.AddComponentMenuPrefix + "Named Animation Event Listener")]
-    public class NamedAnimationEventListenerMB : CachedMonoBehaviour
+    public class NamedAnimationEventListenerMB : CachedMB
     {
         [SerializeField]
         private StringReference _eventName;

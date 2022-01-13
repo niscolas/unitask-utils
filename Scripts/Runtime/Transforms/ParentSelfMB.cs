@@ -6,7 +6,7 @@ using UnityEngine.Events;
 namespace niscolas.UnityUtils.Extras
 {
     [AddComponentMenu(Constants.AddComponentMenuPrefix + "Parent Self")]
-    public class ParentSelfMB : AutoTriggerMonoBehaviour
+    public class ParentSelfMB : AutoTriggerMB
     {
         [SerializeField]
         private ReferenceOrTag<Transform> _parent;

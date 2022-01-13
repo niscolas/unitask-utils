@@ -6,7 +6,7 @@ using UnityEngine.Events;
 namespace niscolas.UnityUtils.Extras
 {
     [AddComponentMenu(Constants.AddComponentMenuPrefix + "Activable")]
-    public class ActivableMB : CachedMonoBehaviour
+    public class ActivableMB : CachedMB
     {
         [SerializeField]
         private BoolReference _isActivated;

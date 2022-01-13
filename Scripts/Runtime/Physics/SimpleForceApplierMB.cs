@@ -6,7 +6,7 @@ using UnityEngine;
 namespace niscolas.UnityUtils.Extras
 {
     [AddComponentMenu(Constants.AddComponentMenuPrefix + "Simple Apply Force")]
-    public class SimpleForceApplierMB : CachedMonoBehaviour
+    public class SimpleForceApplierMB : CachedMB
     {
         [SerializeField]
         private FloatReference _force = new(1);

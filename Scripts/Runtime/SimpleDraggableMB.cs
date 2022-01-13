@@ -8,7 +8,7 @@ namespace niscolas.UnityUtils.Extras
 {
     [AddComponentMenu(Constants.AddComponentMenuPrefix + "Simple Draggable")]
     public class SimpleDraggableMB :
-        CachedMonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+        CachedMB, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
         [SerializeField]
         private RectTransform _targetRectTransform;

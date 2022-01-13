@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace niscolas.UnityUtils.Extras
 {
-    public class DoTweenTransformMoveWaypointWalkerMonoBehaviour :
-        DOTweenWaypointWalkerMonoBehaviour<DOTweenTransformMoveWaypointWalkerSettings>
+    public class DOTweenTransformMoveWaypointWalkerMB :
+        DOTweenWaypointWalkerMB<DOTweenTransformMoveWaypointWalkerSettings>
     {
         [SerializeField]
         private Transform _target;

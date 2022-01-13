@@ -7,7 +7,7 @@ namespace niscolas.UnityUtils.Extras
 {
     [AddComponentMenu(Constants.AddComponentMenuPrefix + "Event System First Selected")]
     [DisallowMultipleComponent]
-    public class EventSystemFirstSelectedMB : AutoTriggerMonoBehaviour
+    public class EventSystemFirstSelectedMB : AutoTriggerMB
     {
         [SerializeField]
         private GameObject _target;

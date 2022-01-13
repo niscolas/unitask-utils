@@ -6,7 +6,7 @@ using UnityEngine;
 namespace niscolas.UnityUtils.Extras
 {
     [AddComponentMenu(Constants.AddComponentMenuPrefix + "Keep Relative Position")]
-    public class KeepRelativePositionMB : AutoTriggerMonoBehaviour
+    public class KeepRelativePositionMB : AutoTriggerMB
     {
         [Required, SerializeField]
         private Transform _target;

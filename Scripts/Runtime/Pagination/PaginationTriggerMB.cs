@@ -5,7 +5,7 @@ using UnityEngine.Events;
 namespace niscolas.UnityUtils.Extras
 {
     [AddComponentMenu(Constants.AddComponentMenuPrefix + "Pagination Trigger")]
-    public class PaginationTriggerMB : CachedMonoBehaviour
+    public class PaginationTriggerMB : CachedMB
     {
         [Header(HeaderTitles.Events)]
         [SerializeField]

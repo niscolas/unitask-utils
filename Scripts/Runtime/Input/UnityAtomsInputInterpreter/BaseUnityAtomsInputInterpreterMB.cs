@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 namespace niscolas.UnityUtils.Extras
 {
     public abstract class BaseUnityAtomsInputInterpreterMB<T, P, C, V, E1, E2, EI, ER, F, VI, R> :
-        CachedMonoBehaviour
+        CachedMB
         where T : struct
         where P : struct, IPair<T>
         where C : AtomBaseVariable<T>

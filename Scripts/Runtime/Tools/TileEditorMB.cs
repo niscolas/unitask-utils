@@ -8,7 +8,7 @@ using UnityEngine.Serialization;
 namespace niscolas.UnityUtils.Extras
 {
     [AddComponentMenu(Constants.AddComponentMenuPrefix + "Tile Editor")]
-    public class TileEditorMB : CachedMonoBehaviour
+    public class TileEditorMB : CachedMB
     {
         public enum MultiTileSpawnType
         {

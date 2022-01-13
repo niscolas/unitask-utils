@@ -9,7 +9,7 @@ using UnityEngine.Events;
 namespace niscolas.UnityUtils.Extras
 {
     [AddComponentMenu(Constants.AddComponentMenuPrefix + "Collider Callbacks")]
-    public class ColliderCallbacksMB : CachedMonoBehaviour
+    public class ColliderCallbacksMB : CachedMB
     {
         [SerializeField]
         private Collider[] _colliders;

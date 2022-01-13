@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace niscolas.UnityUtils.Extras
 {
-    public abstract class BaseCopyTransformMB : CachedMonoBehaviour
+    public abstract class BaseCopyTransformMB : CachedMB
     {
         [SerializeField]
         private ReferenceOrTag<Transform> _copyTarget;

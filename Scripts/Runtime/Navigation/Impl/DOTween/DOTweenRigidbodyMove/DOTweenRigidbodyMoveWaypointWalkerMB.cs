@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace niscolas.UnityUtils.Extras
 {
-    public class DoTweenRigidbodyMoveWaypointWalkerMonoBehaviour :
-        DOTweenWaypointWalkerMonoBehaviour<DOTweenRigidbodyMoveWaypointWalkerSettings>
+    public class DOTweenRigidbodyMoveWaypointWalkerMB :
+        DOTweenWaypointWalkerMB<DOTweenRigidbodyMoveWaypointWalkerSettings>
     {
         [SerializeField]
         private Rigidbody _rigidbody;

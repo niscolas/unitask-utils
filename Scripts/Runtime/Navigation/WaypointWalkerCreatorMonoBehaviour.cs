@@ -109,7 +109,7 @@ namespace niscolas.UnityUtils.Extras
 
         public void Remove(GameObject target)
         {
-            if (!target.TryGetComponent(out WaypointWalkerMonoBehaviour waypointWalker))
+            if (!target.TryGetComponent(out WaypointWalkerMB waypointWalker))
             {
                 return;
             }

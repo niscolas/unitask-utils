@@ -6,7 +6,7 @@ using UnityEngine;
 namespace niscolas.UnityUtils.Extras
 {
     [AddComponentMenu(Constants.AddComponentMenuPrefix + "Position Limiter")]
-    public class PositionLimiterMB : CachedMonoBehaviour
+    public class PositionLimiterMB : CachedMB
     {
         [SerializeField]
         private BoundsMB _boundsBehaviour;

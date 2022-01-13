@@ -6,8 +6,8 @@ using UnityEngine;
 
 namespace niscolas.UnityUtils.Extras
 {
-    [AddComponentMenu(Async.Constants.AddComponentMenuPrefix + "Counter Text")]
-    public class CounterTextMB : AutoTriggerMonoBehaviour
+    [AddComponentMenu(Constants.AddComponentMenuPrefix + "Counter Text")]
+    public class CounterTextMB : AutoTriggerMB
     {
         [SerializeField]
         private SerializedCounterData _data;

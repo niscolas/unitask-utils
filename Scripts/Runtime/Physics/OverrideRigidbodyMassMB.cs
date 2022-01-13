@@ -7,7 +7,7 @@ using UnityEngine;
 namespace niscolas.UnityUtils.Extras
 {
     [AddComponentMenu(Constants.AddComponentMenuPrefix + "Override Rigidbody Mass")]
-    public class OverrideRigidbodyMassMB : AutoTriggerMonoBehaviour
+    public class OverrideRigidbodyMassMB : AutoTriggerMB
     {
         [Required]
         [SerializeField]

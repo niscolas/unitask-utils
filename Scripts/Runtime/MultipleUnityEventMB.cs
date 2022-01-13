@@ -9,7 +9,7 @@ using UnityEngine.Events;
 namespace niscolas.UnityUtils.Extras
 {
     [AddComponentMenu(Constants.AddComponentMenuPrefix + "Multiple Unity Event")]
-    public class MultipleUnityEventMB : AutoTriggerMonoBehaviour
+    public class MultipleUnityEventMB : AutoTriggerMB
     {
         [SerializeField]
         private Vector2IntReference _callCountRange = new(Vector2Int.one);

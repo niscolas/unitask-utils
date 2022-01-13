@@ -8,7 +8,7 @@ namespace niscolas.UnityUtils.Extras
 {
     [AddComponentMenu(Constants.AddComponentMenuPrefix + "DOTween" + NiceClassSuffix)]
     public class DOTweenWaypointWalkerCreatorMonoBehaviour<TWalker, TSettings> : WaypointWalkerCreatorMonoBehaviour
-        where TWalker : DOTweenWaypointWalkerMonoBehaviour<TSettings>
+        where TWalker : DOTweenWaypointWalkerMB<TSettings>
         where TSettings : DOTweenWaypointWalkerSettings
     {
         [Title("Base Settings")]

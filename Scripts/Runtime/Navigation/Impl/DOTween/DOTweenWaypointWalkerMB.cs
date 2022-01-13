@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace niscolas.UnityUtils.Extras
 {
-    public abstract class DOTweenWaypointWalkerMonoBehaviour<T> : WaypointWalkerMonoBehaviour
+    public abstract class DOTweenWaypointWalkerMB<T> : WaypointWalkerMB
         where T : DOTweenWaypointWalkerSettings
     {
         [SerializeField]
