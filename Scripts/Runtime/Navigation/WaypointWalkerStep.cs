@@ -12,7 +12,7 @@ namespace niscolas.UnityUtils.Extras
     public class WaypointWalkerStep
     {
         [SerializeField]
-        private List<Waypoint> _waypoints = new();
+        private List<Waypoint> _waypoints = new List<Waypoint>();
 
         [SerializeField]
         private bool _startFromFirstWaypoint = true;

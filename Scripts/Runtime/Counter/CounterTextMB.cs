@@ -16,7 +16,7 @@ namespace niscolas.UnityUtils.Extras
         private GameObject _textPrefab;
 
         [SerializeField]
-        private Vector3Reference _textSpawnOffset = new();
+        private Vector3Reference _textSpawnOffset = new Vector3Reference();
 
         [Required]
         [SerializeField]

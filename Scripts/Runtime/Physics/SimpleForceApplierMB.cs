@@ -9,7 +9,7 @@ namespace niscolas.UnityUtils.Extras
     public class SimpleForceApplierMB : CachedMB
     {
         [SerializeField]
-        private FloatReference _force = new(1);
+        private FloatReference _force = new FloatReference(1);
 
         [SerializeField]
         private ForceMode _forceMode;

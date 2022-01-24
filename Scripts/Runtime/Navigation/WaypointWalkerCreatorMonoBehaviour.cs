@@ -14,7 +14,7 @@ namespace niscolas.UnityUtils.Extras
         private List<Waypoint> _waypoints;
 
         [SerializeField]
-        protected BoolReference _startFromFirstWaypoint = new(false);
+        protected BoolReference _startFromFirstWaypoint = new BoolReference(false);
 
         [SerializeField]
         protected IntReference _playTimes;
@@ -120,7 +120,7 @@ namespace niscolas.UnityUtils.Extras
 
         private List<Waypoint> ComputeWaypointWalkerWaypoints(int index)
         {
-            List<Waypoint> waypointWalkerWaypoints = new();
+            List<Waypoint> waypointWalkerWaypoints = new List<Waypoint>();
 
             for (int i = 1; i <= _waypoints.Count; i++)
             {

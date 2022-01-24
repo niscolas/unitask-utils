@@ -12,7 +12,7 @@ namespace niscolas.UnityUtils.Extras
         private BoolReference _isActivated;
 
         [SerializeField]
-        private BoolReference _canChangeState = new(true);
+        private BoolReference _canChangeState = new BoolReference(true);
 
         [SerializeField]
         private BoolReference _raiseOnStart;

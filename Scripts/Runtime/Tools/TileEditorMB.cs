@@ -160,7 +160,7 @@ namespace niscolas.UnityUtils.Extras
 
         public static Vector3 ComputeTilePosition(int i, int j, int k, Vector3 offset, Vector3 gridOffset)
         {
-            Vector3 position = new()
+            Vector3 position = new Vector3
             {
                 x = offset.x * i + gridOffset.x,
                 y = offset.y * j + gridOffset.y,

@@ -12,15 +12,15 @@ namespace niscolas.UnityUtils.Extras
     public class MultipleUnityEventMB : AutoTriggerMB
     {
         [SerializeField]
-        private Vector2IntReference _callCountRange = new(Vector2Int.one);
+        private Vector2IntReference _callCountRange = new Vector2IntReference(Vector2Int.one);
 
         [SecondsLabel]
         [SerializeField]
-        private DelayWrapper _delay = new();
+        private DelayWrapper _delay = new DelayWrapper();
 
         [SecondsLabel]
         [SerializeField]
-        private DelayWrapper _callInterval = new();
+        private DelayWrapper _callInterval = new DelayWrapper();
 
         [SerializeField]
         private UnityEvent _event;

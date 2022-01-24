@@ -16,7 +16,7 @@ namespace niscolas.UnityUtils.Extras
 
         [ShowIf(nameof(_useFixedOffset))]
         [SerializeField]
-        private Vector3Reference _fixedOffset = new();
+        private Vector3Reference _fixedOffset = new Vector3Reference();
 
         private bool _isOffsetCached;
 

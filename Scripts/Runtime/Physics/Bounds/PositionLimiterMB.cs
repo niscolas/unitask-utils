@@ -11,7 +11,7 @@ namespace niscolas.UnityUtils.Extras
         [SerializeField]
         private BoundsMB _boundsBehaviour;
 
-        private readonly List<LimitPositionTargetMB> _targets = new();
+        private readonly List<LimitPositionTargetMB> _targets = new List<LimitPositionTargetMB>();
 
         private Bounds Bounds => _boundsBehaviour.Bounds;
 
